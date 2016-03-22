@@ -1,0 +1,77 @@
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+
+div.pagecontrols {
+	position: relative;
+	padding: 16px 0 0 0;
+}
+
+.pagecontrols .rightside {
+	float: right;
+}
+
+.pagecontrols a, .pagecontrols select, .customSelect {	
+	font-size: 14px;
+	font-weight: 700;
+	height: 32px;
+	border: 1px solid #ccc;
+	background: url(img/page-button-bg.png);
+	color: #4d4d4d;
+	padding: 6px 16px;
+}
+
+.pagecontrols a {
+	position: relative;
+	display: block;
+	float: left;
+	margin: 0;
+}
+
+.pagecontrols .label {
+	float: left;
+	margin-top: 6px;
+	font-weight: 700;
+	color: #4d4d4d;
+	font-size: 14px;
+}
+
+.pagecontrols a.action {
+	width: 48px;
+	margin-left: 16px;
+}
+
+.pagecontrols a.action:before {
+	display: block;
+	content: '';
+	position: absolute;
+	left: 6px;
+	top: 4px;
+}
+
+.pagecontrols .flip:before {
+	background: url(img/page-button-flip.png) no-repeat center center;
+	width: 34px;
+	height: 25px;
+}
+
+.pagecontrols .rotate:before {
+	background: url(img/page-button-rotate.png) no-repeat center center;
+	width: 30px;
+	height: 23px;
+}
+
+
+a {
+	color: #174479;
+	text-decoration: none;
+	font-weight: 700;
+}
+
