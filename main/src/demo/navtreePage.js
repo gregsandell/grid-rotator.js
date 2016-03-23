@@ -18,24 +18,22 @@ function NavtreePage() {
     };
 
     this.makeDatagrid = function(responseData) {    // public
-        console.log('in makeDatagrid');
+        //console.log('in makeDatagrid');
         var chartSubjectArray;
-        //var topicObj = new TopicDataAdapter();
         var gridOptions = { "xParam": "geog", "yParam": "timeperiod", "titleParam": "datafield", "suppressNAs": true};
-        var datagrid = new Datagrid(responseData, gridOptions);
-        datagrid.initializeGrid();
+        var datagrid = new Datagrid(responseData, gridOptions);  // needed to make mapToArray calls
+
         if (this.rotationCount % 3 == 0) {
             gridOptions = { "xParam": "geog", "yParam": "timeperiod", "titleParam": "datafield", "suppressNAs": true};
-            chartSubjectArray = datagrid.datafieldKeys;
-            console.log('datagrid.datafieldKeys ', datagrid.datafieldKeys);
+            chartSubjectArray = datagrid.mapToArray('datafield', 'long');
         } else if (this.rotationCount % 3 == 1) {
             gridOptions = { "xParam": "geog", "yParam": "datafield", "titleParam": "timeperiod", "suppressNAs": true};
-            chartSubjectArray = datagrid.timeperiodKeys;
+            chartSubjectArray = datagrid.mapToArray('timeperiod', 'long');
         } else if (this.rotationCount % 3 == 2) {
             gridOptions = { "xParam": "datafield", "yParam": "timeperiod", "titleParam": "geog", "suppressNAs": true};
-            chartSubjectArray = datagrid.geogKeys;
+            chartSubjectArray = datagrid.mapToArray('geog', 'long');
         }
-        console.log('chartSubjectArray is ', chartSubjectArray);
+        //console.log('chartSubjectArray is ', chartSubjectArray);
         if (this.flipCount % 2 == 1) {
             /* Swap 'em */
             var xParam = gridOptions.xParam;
@@ -47,10 +45,8 @@ function NavtreePage() {
 
         /* For each topic, output a grid. */
         $.each(chartSubjectArray, function(i, subject) {
-
             /* Each grid shares the same options, except for its title */
-            gridOptions["titleChoice"] = subject.name;
-
+            gridOptions.titleChoice = subject.key;   // key is the only possible value here.
             datagrid = new Datagrid(responseData, gridOptions);
             datagrid.initializeGrid();
             var table = datagrid.generateView((subject.long && subject.long != "") ? subject.long : subject.short);

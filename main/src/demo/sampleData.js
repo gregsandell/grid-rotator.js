@@ -1094,209 +1094,101 @@ var sampleData = {
                 "geog": "17197"
             }
 
-        ],
-        "datafield_map": {
-            "ARTESTBPC_ARTPCESTAB": {
-                "short": "ARTESTBPC_ARTPCESTAB",
-                "name": "ARTESTBPC_ARTPCESTAB"
-            },
-            "NUMNFRLETTER": {
-                "short": "NUMNFRLETTER",
-                "name": "NUMNFRLETTER"
-            }
-        },
-        "timeperiod_map": {
-            "1996": {
-                "short": "1996",
-                "name": "1996"
-            },
-            "1997": {
-                "short": "1997",
-                "name": "1997"
-            },
-            "1998": {
-                "short": "1998",
-                "name": "1998"
-            },
-            "1999": {
-                "short": "1999",
-                "name": "1999"
-            },
-            "2000": {
-                "short": "2000",
-                "name": "2000"
-            },
-            "2001": {
-                "short": "2001",
-                "name": "2001"
-            },
-            "2002": {
-                "short": "2002",
-                "name": "2002"
-            },
-            "2003": {
-                "short": "2003",
-                "name": "2003"
-            },
-            "2004": {
-                "short": "2004",
-                "name": "2004"
-            },
-            "2005": {
-                "short": "2005",
-                "name": "2005"
-            },
-            "2006": {
-                "short": "2006",
-                "name": "2006"
-            },
-            "2007": {
-                "short": "2007",
-                "name": "2007"
-            },
-            "2009": {
-                "short": "2009",
-                "name": "2009"
-            }
-        },
-        "geog_map": {
-            "17031": {
-                "short": "Cook",
-                "long": "Cook",
-                "name": "17031"
-            },
-            "17043": {
-                "short": "DuPage",
-                "long": "DuPage",
-                "name": "17043"
-            },
-            "17089": {
-                "short": "Kane",
-                "long": "Kane",
-                "name": "17089"
-            },
-            "17093": {
-                "short": "Kendall",
-                "long": "Kendall",
-                "name": "17093"
-            },
-            "17097": {
-                "short": "Lake",
-                "long": "Lake",
-                "name": "17097"
-            },
-            "17111": {
-                "short": "McHenry",
-                "long": "McHenry",
-                "name": "17111"
-            },
-            "17197": {
-                "short": "Will",
-                "long": "Will",
-                "name": "17197"
-            }
-        }
+        ]
     },
     maps: {
         "datafield": {
             "ARTESTBPC_ARTPCESTAB": {
                 "short": "ARTESTBPC_ARTPCESTAB",
-                "name": "ARTESTBPC_ARTPCESTAB"
+                "long": "ARTESTBPC_ARTPCESTAB"
             },
             "NUMNFRLETTER": {
                 "short": "NUMNFRLETTER",
-                "name": "NUMNFRLETTER"
+                "long": "NUMNFRLETTER"
             }
         },
         "timeperiod": {
             "1996": {
                 "short": "1996",
-                "name": "1996"
+                "long": "1996"
             },
             "1997": {
                 "short": "1997",
-                "name": "1997"
+                "long": "1997"
             },
             "1998": {
                 "short": "1998",
-                "name": "1998"
+                "long": "1998"
             },
             "1999": {
                 "short": "1999",
-                "name": "1999"
+                "long": "1999"
             },
             "2000": {
                 "short": "2000",
-                "name": "2000"
+                "long": "2000"
             },
             "2001": {
                 "short": "2001",
-                "name": "2001"
+                "long": "2001"
             },
             "2002": {
                 "short": "2002",
-                "name": "2002"
+                "long": "2002"
             },
             "2003": {
                 "short": "2003",
-                "name": "2003"
+                "long": "2003"
             },
             "2004": {
                 "short": "2004",
-                "name": "2004"
+                "long": "2004"
             },
             "2005": {
                 "short": "2005",
-                "name": "2005"
+                "long": "2005"
             },
             "2006": {
                 "short": "2006",
-                "name": "2006"
+                "long": "2006"
             },
             "2007": {
                 "short": "2007",
-                "name": "2007"
+                "long": "2007"
             },
             "2009": {
                 "short": "2009",
-                "name": "2009"
+                "long": "2009"
             }
         },
         "geog": {
             "17031": {
                 "short": "Cook",
-                "long": "Cook",
-                "name": "17031"
+                "long": "Cook"
             },
             "17043": {
                 "short": "DuPage",
-                "long": "DuPage",
-                "name": "17043"
+                "long": "DuPage"
             },
             "17089": {
                 "short": "Kane",
-                "long": "Kane",
-                "name": "17089"
+                "long": "Kane"
             },
             "17093": {
                 "short": "Kendall",
-                "long": "Kendall",
-                "name": "17093"
+                "long": "Kendall"
             },
             "17097": {
                 "short": "Lake",
-                "long": "Lake",
-                "name": "17097"
+                "long": "Lake"
             },
             "17111": {
                 "short": "McHenry",
-                "long": "McHenry",
-                "name": "17111"
+                "long": "McHenry"
             },
             "17197": {
                 "short": "Will",
-                "long": "Will",
-                "name": "17197"
+                "long": "Will"
             }
         }
     }

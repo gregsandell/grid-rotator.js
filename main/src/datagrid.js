@@ -4,6 +4,7 @@ function Datagrid(inputData, options) {
     var gridOptions = options;
     var self = this;
 
+    //console.log('datagrid constructor, options = ', options);
     /*
      * Arguments
      * inputData: GetCmapData service response data, after adapted by TopicDataAdapter
@@ -15,42 +16,44 @@ function Datagrid(inputData, options) {
      */
     this.initializeGrid = function() {
 
-        generateMaps();
-
-        gridResult = generateGrid(gridOptions);
+        gridResult = generateGrid();
         //console.log('gridResult is now: ' + JSON.stringify(gridResult));
-    }
-
-    function generateMaps() {
-        self[gridOptions.titleParam + 'Keys'] = mapToArray(gridSource.maps[gridOptions.titleParam]);
-        self[gridOptions.xParam + 'Keys'] = mapToArray(gridSource.maps[gridOptions.xParam]);
-        self[gridOptions.yParam + 'Keys'] = mapToArray(gridSource.maps[gridOptions.yParam]);
-        //console.log('field = ' + gridOptions.titleParam + 'Keys');
-        //console.log('datafieldKeys = ', self['datafieldKeys']);
+        return gridResult;
     }
 
     /*
      * It's easier to iterate through an array than a hashmap.  This returns an "array version" of a hashmap.
      */
-    // TODO This code is gross, simplify soon
-    function mapToArray(map) {  // private
-        //console.log('map input is ', map);
+    this.mapToArray = function(dimension, type) {
         var result = [];
         var keys = [];
-        for (var key in map) {
-            //console.log('key is ' + key);
-            if (map.hasOwnProperty(key)) {
-                keys.push(key);
-            }
+        var okDimensions = [gridOptions.titleParam, gridOptions.xParam, gridOptions.yParam];
+        if ($.inArray(dimension, okDimensions) == -1) {
+            console.log('No such dimension \'' + dimension + '\'.  Acceptable values are ' +
+                okDimensions.join(', ') + '.  Defaulting to \'' + gridOptions.titleParam + '\'');
+            dimension = gridOptions.titleParam;
         }
-        keys.sort();
-        //console.log('sorted keys are: ' + JSON.stringify(keys));
-        for (i in keys) {
-            var key = keys[i];
-            var value = map[key];
-            value.name = key;
-            result.push(value);
+        var okTypes = ['key', 'long', 'short'];
+        if ($.inArray(type, okTypes) == -1) {
+            console.log('No such type \'' + type + '\'.  Acceptable values are ' +
+                okTypes.join(', ') + '.  Defaulting to \'' + short + '\'');
+            type = 'short';
         }
+        var map = gridSource.maps[dimension];
+        keys = Object.keys(map);
+        $.each(keys, function(idx, key) {
+            var record = map[key];
+            record.key = key;
+            result.push(record);
+        });
+        result.sort(function(a, b) {
+            if (a[type] < b[type]) {
+                return -1;
+            } else if (a[type] > b[type]) {
+                return 1;
+            } else {
+                return 0; }
+        });
         return result;
     };
 
@@ -107,7 +110,6 @@ function Datagrid(inputData, options) {
 
         /* Prepare the data for the y-axis of the grid */
         var rows = [];
-        //console.log('gridOptions.yParam is ' + gridOptions.yParam);
         $.each(yValues, function(i, yValue) {
             var row = {};
             var long = gridSource.maps[gridOptions.yParam][yValue].long;
@@ -116,9 +118,28 @@ function Datagrid(inputData, options) {
             var values = [];
             $.each(xValues, function(j, xValue) {
                 var v = "n/a";
+                //console.log('gridOptions before iterating on rows is ', gridOptions);
                 $.each(gridSource.data.rows, function(i, row) {
+                    //if (row[gridOptions.titleParam] == gridOptions.titleChoice) {
+                    //    console.log('matching titles');
+                    //} else {
+                    //    console.log('unmatching titles, ' + row[gridOptions.titleParam] + ' and ');
+                    //}
+                    //var s = 'row["' + gridOptions.titleParam + '"] (' + row[gridOptions.titleParam] + ') and titleChoice ("' + gridOptions.titleChoice + '") are ';
+                    //console.log(s + (row[gridOptions.titleParam] == gridOptions.titleChoice ? 'equal' : 'NOT equal'));
+                    //s = 'row["' + gridOptions.xParam + '"] (' + row[gridOptions.xParam] + ') and xValue ("' + xValue + '") are ';
+                    //console.log(s, (row[gridOptions.xParam] == xValue ? 'equal' : 'NOT equal'));
+                    //s = 'row["' + gridOptions.yParam + '"] (' + row[gridOptions.yParam] + ') and yValue ("' + yValue + '") are ';
+                    //console.log(s + (row[gridOptions.yParam] == yValue ? 'equal' : 'NOT equal'));
+                    //s = 'row["value"] = ' + row.value + ', we have '
+                    //console.log(s + (row.value ? 'a value' : 'NO value'));
+                    //if (row[gridOptions.xParam] == undefined) console.log('undefined ' + gridOptions.xParam + ' field in row');
+                    //if (xValue == undefined) console.log('undefined xValue');
+                    //if (row[gridOptions.yParam] == undefined) console.log('undefined ' + gridOptions.yParam + ' field in row');
+                    //if (yValue == undefined) console.log('undefined yValue');
                     if (row[gridOptions.titleParam] == gridOptions.titleChoice && row[gridOptions.xParam] == xValue && row[gridOptions.yParam] == yValue) {
                         v = row.value;
+                        //console.log('push');
                         values.push(v);
                         return false;
                     }
