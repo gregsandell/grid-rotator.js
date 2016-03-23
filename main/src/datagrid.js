@@ -24,7 +24,7 @@ function Datagrid(inputData, options) {
     /*
      * It's easier to iterate through an array than a hashmap.  This returns an "array version" of a hashmap.
      */
-    this.mapToArray = function(dimension, type) {
+    this.mapToArray = function(dimension, sortType) {
         var result = [];
         var keys = [];
         var okDimensions = [gridOptions.titleParam, gridOptions.xParam, gridOptions.yParam];
@@ -34,10 +34,10 @@ function Datagrid(inputData, options) {
             dimension = gridOptions.titleParam;
         }
         var okTypes = ['key', 'long', 'short'];
-        if ($.inArray(type, okTypes) == -1) {
-            console.log('No such type \'' + type + '\'.  Acceptable values are ' +
+        if ($.inArray(sortType, okTypes) == -1) {
+            console.log('No such type \'' + sortType + '\'.  Acceptable values are ' +
                 okTypes.join(', ') + '.  Defaulting to \'' + short + '\'');
-            type = 'short';
+            sortType = 'short';
         }
         var map = gridSource.maps[dimension];
         keys = Object.keys(map);
@@ -47,9 +47,9 @@ function Datagrid(inputData, options) {
             result.push(record);
         });
         result.sort(function(a, b) {
-            if (a[type] < b[type]) {
+            if (a[sortType] < b[sortType]) {
                 return -1;
-            } else if (a[type] > b[type]) {
+            } else if (a[sortType] > b[sortType]) {
                 return 1;
             } else {
                 return 0; }

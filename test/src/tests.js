@@ -36,6 +36,7 @@ QUnit.test("Outputs expected map data", function( assert ) {
     var chosenValue = "9";
     var tableCaption = 'The City of Palo Alto';
     var yearLongName = 'The Year of 1996';
+    var yearShortName = '1996';
     var datafieldLongName = 'City Revenue';
     var gridOptions = { "yParam": "datafield", "xParam": "timeperiod", "titleParam": "geog", "titleChoice": chosenCityKey, "suppressNAs": true};
     var sampleData = {
@@ -63,7 +64,7 @@ QUnit.test("Outputs expected map data", function( assert ) {
         },
         maps: {
             datafield: {"city_revenue": {long: datafieldLongName, short: 'Revenue'}},
-            timeperiod: {"1996Key1": {long: 'The Year of 1996', short: '1996'}},
+            timeperiod: {"1996Key1": {long: yearLongName, short: yearShortName}},
             geog: {"cityKey1": {short: 'Palo Alto', long: tableCaption},
                     "cityKey2": {short: 'Brisbane', long: 'The City of Brisbane'},
                      "cityKey3": {short: 'San Diego', long: 'The City of San Diego'}
@@ -74,18 +75,29 @@ QUnit.test("Outputs expected map data", function( assert ) {
     datagrid.initializeGrid();
 
     var $generatedHtml = datagrid.generateView(sampleData.maps.geog[gridOptions.titleChoice].long);
-    assert.deepEqual(datagrid[gridOptions.xParam + 'Keys'], [{"long": yearLongName,"name": "1996Key1","short": "1996"}]);
-    assert.deepEqual(datagrid[gridOptions.yParam + 'Keys'], [{long: 'City Revenue', short: 'Revenue', name: 'city_revenue'}]);
-    assert.deepEqual(datagrid[gridOptions.titleParam + 'Keys'], [
-        {name: chosenCityKey, short: 'Palo Alto', long: tableCaption},
-        {name: "cityKey2", short: 'Brisbane', long: 'The City of Brisbane'},
-        {name: "cityKey3", short: 'San Diego', long: 'The City of San Diego'}
-    ]);
+    assert.deepEqual(datagrid.mapToArray(gridOptions.xParam, 'long'), [{"long": yearLongName,"key": "1996Key1","short": yearShortName}]);
+    assert.deepEqual(datagrid.mapToArray(gridOptions.yParam, 'long'), [{long: 'City Revenue', short: 'Revenue', key: 'city_revenue'}]);
+    assert.deepEqual(datagrid.mapToArray(gridOptions.titleParam, 'long'), [
+        {
+            "key": "cityKey2",
+            "long": "The City of Brisbane",
+            "short": "Brisbane"
+        },
+        {
+            "key": "cityKey1",
+            "long": tableCaption,
+            "short": "Palo Alto"
+        },
+        {
+            "key": "cityKey3",
+            "long": "The City of San Diego",
+            "short": "San Diego"
+        }    ]);
     console.log('html = ' + $generatedHtml.html());
     assert.equal(sampleData.maps.geog[gridOptions.titleChoice].long, tableCaption);
     assert.equal($generatedHtml.find('table').length, 1);
     assert.equal($generatedHtml.find('table caption').html(), tableCaption);
     assert.equal($generatedHtml.find('table tr').length, 2);
-    assert.equal($generatedHtml.find('table tr th:nth-child(2)').html(), yearLongName);
+    assert.equal($generatedHtml.find('table tr th:nth-child(2)').html(), yearShortName);
     assert.equal($generatedHtml.find('table tr:nth-child(2) th').html(), datafieldLongName);
 });
