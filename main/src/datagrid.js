@@ -1,16 +1,9 @@
-function Datagrid() {
-    var gridSource = {};
+function Datagrid(inputData, options) {
+    var gridSource = inputData;
     var gridResult = {};
-    var gridOptions = {};
-    var geographyArray = [];
-    var timeperiodArray = [];
-    var datafieldArray = [];
+    var gridOptions = options;
+    var self = this;
 
-    if (typeof Datagrid.instance === 'object') {
-        return Datagrid.instance;
-    }
-    Datagrid.instance = this;
-        
     /*
      * Arguments
      * inputData: GetCmapData service response data, after adapted by TopicDataAdapter
@@ -20,30 +13,28 @@ function Datagrid() {
      *     yParam: name of the field in inputData to treat as y values
      *     suppressNAs:  if true, eliminate any row and any column consisting only of "n/a" values
      */
-    this.initializeGrid = function(inputData, options) {
-        //console.log('inputData is ' + JSON.stringify(inputData));
-        gridOptions = options;
-        gridSource = inputData;
-        //console.log('in initialize');
+    this.initializeGrid = function() {
 
         generateMaps();
 
         gridResult = generateGrid(gridOptions);
         //console.log('gridResult is now: ' + JSON.stringify(gridResult));
-    };
+    }
 
-    var generateMaps = function() {
-        geographyArray = mapToArray(gridSource.data.geog_map);
-        //console.log('finished making geographyArray');
-        timeperiodArray = mapToArray(gridSource.data.timeperiod_map);
-        datafieldArray = mapToArray(gridSource.data.datafield_map);
-    };
+    function generateMaps() {
+        self[gridOptions.titleParam + 'Keys'] = mapToArray(gridSource.maps[gridOptions.titleParam]);
+        self[gridOptions.xParam + 'Keys'] = mapToArray(gridSource.maps[gridOptions.xParam]);
+        self[gridOptions.yParam + 'Keys'] = mapToArray(gridSource.maps[gridOptions.yParam]);
+        //console.log('field = ' + gridOptions.titleParam + 'Keys');
+        //console.log('datafieldKeys = ', self['datafieldKeys']);
+    }
 
     /*
      * It's easier to iterate through an array than a hashmap.  This returns an "array version" of a hashmap.
      */
-    var mapToArray = function(map) {  // private
-        console.log('map input is ', map);
+    // TODO This code is gross, simplify soon
+    function mapToArray(map) {  // private
+        //console.log('map input is ', map);
         var result = [];
         var keys = [];
         for (var key in map) {
@@ -63,30 +54,15 @@ function Datagrid() {
         return result;
     };
 
-    this.setOptions = function(options) {   // TO DO Remove, noone is using (I think)
-        gridOptions = options;
-    };
-
-    this.setGridSource = function(inputData) {   // TO DO Remove, noone is using (I think)
-        gridSource = inputData;
-    };
-
     /*
      * Generate a ready-to-print grid dataset based on the options.
      */
-    var generateGrid = function(options) {   // TO DO should use private gridOptions instead of arg
-        var titleParam = options.titleParam;
-        var titleParam_map = titleParam + "_map";
-        var titleChoice = options.titleChoice;
-        var xParam = options.xParam;
-        var xParam_map = xParam + "_map";
-        var yParam = options.yParam;
-        var yParam_map = yParam + "_map";
+    function generateGrid() {   // TO DO should use private gridOptions instead of arg
         var xValues = [];
         var yValues = [];
         var result = {};
 
-        if (!gridSource || !gridSource.data || !gridSource.data.rows) {
+        if (!gridSource || !gridSource.data || !gridSource.data.rows || !gridSource.maps) {
             throw "Minimal data input requirement not met";
         }
 
@@ -98,91 +74,79 @@ function Datagrid() {
         //}
         $.each(gridSource.data.rows, function(i, row) {
             //console.log('row is ' + JSON.stringify(row));
-            //console.log('is there an ' + xParam + ' field in above?');
-            if ($.inArray(row[xParam], xValues) == -1) {
-                //console.log('pushing row["' + xParam + '"] (' + row[xParam] + ') onto xValues');
-                xValues.push(row[xParam]);
+            //console.log('is there an ' + gridOptions.xParam + ' field in above?');
+            if ($.inArray(row[gridOptions.xParam], xValues) == -1) {
+                //console.log('pushing row["' + gridOptions.xParam + '"] (' + row[gridOptions.xParam] + ') onto xValues');
+                xValues.push(row[gridOptions.xParam]);
             }
-            if ($.inArray(row[yParam], yValues) == -1) {
-                yValues.push(row[yParam]);
+            if ($.inArray(row[gridOptions.yParam], yValues) == -1) {
+                yValues.push(row[gridOptions.yParam]);
             }
         });
 
-        console.log('xParam = ' + xParam + ', yParam = ' + yParam);
-        console.log('xValues are ' + JSON.stringify(xValues));
-        console.log('yValues are ' + JSON.stringify(yValues));
+        //console.log('xParam = ' + gridOptions.xParam + ', yParam = ' + gridOptions.yParam);
+        //console.log('xValues are ' + JSON.stringify(xValues));
+        //console.log('yValues are ' + JSON.stringify(yValues));
 
         //console.log('gridSource.data.rows is now ' + JSON.stringify(gridSource.data.rows));
 
         /* Prepare the data for the x-axis of the grid */
         result.x = [];
+        //console.log('gridOptions.xParam is ' + gridOptions.xParam);
         //console.log('loop going to iterate on xValues = ' + JSON.stringify(xValues));
-        //console.log('xParam_map= ' + xParam_map);
+        //console.log(gridOptions.xParam + ' map is' +  JSON.stringify(gridSource.maps[gridOptions.xParam]));
         $.each(xValues, function(i, xValue) {
-            var long = gridSource.data[xParam_map][xValue].long;
-            var short = gridSource.data[xParam_map][xValue].short;
+            var long = gridSource.maps[gridOptions.xParam][xValue].long;
+            var short = gridSource.maps[gridOptions.xParam][xValue].short;
 
             /* Careful, the 'long' field sometimes comes back  */
-            result.x.push((long && long != "") ? long : short);
+            result.x.push((short && short != "") ? short : long);
         });
 
         //console.log('result.x is now: ' + JSON.stringify(result.x));
 
         /* Prepare the data for the y-axis of the grid */
         var rows = [];
-        //console.log('outer loop going to iterate on yValues = ' + JSON.stringify(yValues));
-        //console.log('yParam_map is ' + yParam_map);  // datafield_map
-        $.each(yValues, function(i, yValue) {  // ["population"]
+        //console.log('gridOptions.yParam is ' + gridOptions.yParam);
+        $.each(yValues, function(i, yValue) {
             var row = {};
-            var long = gridSource.data[yParam_map][yValue].long;   // 'The Population'
-            var short = gridSource.data[yParam_map][yValue].short; // 'population'
-            row.y = (long && long != "") ? long : short;           // 'The Population'
+            var long = gridSource.maps[gridOptions.yParam][yValue].long;
+            var short = gridSource.maps[gridOptions.yParam][yValue].short;
+            row.y = (long && long != "") ? long : short;
             var values = [];
-            //console.log('inner loop going to iterate on xValues = ' + JSON.stringify(xValues));
-            $.each(xValues, function(j, xValue) {  // ["glendora","azusa"]
-                //console.log('outer loop: xValues = ' + xValue + ' being processed')
+            $.each(xValues, function(j, xValue) {
                 var v = "n/a";
                 $.each(gridSource.data.rows, function(i, row) {
-                    //console.log('inner loop: row = ', row);
-
-                    //var s = 'row["' + titleParam + '"] (' + row[titleParam] + ') and titleChoice ("' + titleChoice + '") are ";'
-                    //console.log(s + (row[titleParam] == titleChoice ? 'equal' : 'NOT equal'));
-                    //s = 'row["' + xParam + '"] (' + row[xParam] + ') and xValue ("' + xValue + '") are ";'
-                    //console.log(s, (row[xParam] == xValue ? 'equal' : 'NOT equal'));
-                    //s = 'row["' + yParam + '"] (' + row[yParam] + ') and yValue ("' + yValue + '") are ";'
-                    //console.log(s + (row[yParam] == yValue ? 'equal' : 'NOT equal'));
-                    //s = 'row["value"] = ' + row.value + ', we have '
-                    //console.log(s + (row.value ? 'a value' : 'NO value'));
-                    if (row[titleParam] == titleChoice && row[xParam] == xValue && row[yParam] == yValue) {
+                    if (row[gridOptions.titleParam] == gridOptions.titleChoice && row[gridOptions.xParam] == xValue && row[gridOptions.yParam] == yValue) {
                         v = row.value;
-                        //console.log('pushing value ' + v + ' onto values');
                         values.push(v);
-                        //console.log('abandoning inner loop');
                         return false;
                     }
                 });
-                //console.log('at end of outer loop iteration, values = ' + JSON.stringify(values));
             });
             row.v = values;
             rows.push(row);
-            //console.log('when outer loop is done, rows = ' + JSON.stringify(rows));
         });
         result.rows = rows;
         return result;
     };
 
-    this.generateView = function() {
+    this.generateView = function(caption) {
+        //console.log('in generate view, gridResult is ' + JSON.stringify(gridResult));
         var empties = findEmpties();
         var suppressNAs = gridOptions.suppressNAs != undefined && gridOptions.suppressNAs;
         var dataview = $("<div>").addClass("dataview");
         var table = $("<table>");
+        var caption = $('<caption>').text(caption);
+        table.append(caption);
+        var tbody = $('<tbody>');
         var tr = $("<tr>");
         tr.append($("<th>").text(""));
         $.each(gridResult.x, function(i, columnLabel) {
             if (suppressNAs && empties.x[i]) return true;
             tr.append($("<th>").text(columnLabel));
         });
-        table.append(tr);
+        tbody.append(tr);
         /* This is a hack to keep users from seeing rows of all n/a's.  It only works in non-flipped view.
          * You'll see the n/a's in columns if you flip */
         $.each(gridResult.rows, function(i, row) {
@@ -193,13 +157,14 @@ function Datagrid() {
                 if (suppressNAs && empties.x[i]) return true;
                 tr.append($("<td>").text(value));
             });
-            table.append(tr);
+            tbody.append(tr);
         });
+        table.append(tbody);
         dataview.append(table);
         return dataview;
     };
 
-    var findEmpties = function() {
+    function findEmpties() {
         var result = {};
         result.x = [];
         result.y = [];
@@ -223,16 +188,4 @@ function Datagrid() {
         return result;
     };
 
-    this.getGeographyArray = function() {  // public   TO DO  Just make geographyArray a public property
-        return geographyArray;
-    };
-
-    this.getTimeperiodArray = function() {  // public  TO DO Just make timeperiodArray a public property
-        return timeperiodArray;
-    };
-
-    this.getDatafieldArray = function() {  // public   TO DO just make datafieldArray a public property
-        return datafieldArray;
-    };
-
-}
+};

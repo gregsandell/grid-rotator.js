@@ -1,0 +1,8 @@
+# Ignore WebStorm project folder
+.idea
+# Ignore vim swap files
+*.swp
+# Ignore vim work files
+*~
+# Ignore auto-generated files
+**/.DS_Store

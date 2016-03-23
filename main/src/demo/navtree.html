@@ -10,15 +10,16 @@
         <link rel="stylesheet" href="regional-main.css">
         <script>
             var navtree = new Navtree();
-            var datagrid = new Datagrid();
+//            var gridOptions = { "xParam": "geog", "yParam": "timeperiod", "titleParam": "datafield", "suppressNAs": true};
+//            var datagrid = new Datagrid(sampleData, gridOptions);
             var navtreePage = new NavtreePage();
             var rotationLabels = ["By Topic", "By Time Period", "By Geography"];
             navtreePage.init();
-            navtreePage.makeDatagrid(sampleData);
 
             $(document).ready(function() {
 
                 $("a#makegrid").click(function () {
+                    console.log('makegrid');
                     navtreePage.makeDatagrid(sampleData);
                 });
 

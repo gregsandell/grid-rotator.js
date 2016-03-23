@@ -23,7 +23,7 @@ function TopicDataAdapter() {
         inputData = data;
         makeDataFieldAndTimeperiodMaps();
         makeGeographyMap();
-        //console.log('geog_map is ', geog_map);
+        // console.log('geog_map is ', geog_map);
         geographyArray = mapToArray(geog_map);
         //console.log('finished making geographyArray');
         timeperiodArray = mapToArray(timeperiod_map);
