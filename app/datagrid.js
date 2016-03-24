@@ -16,7 +16,7 @@ function Datagrid(inputData, options) {
     //console.log('datagrid constructor, options = ', options);
     /*
      * Arguments
-     * inputData: GetCmapData service response data, after adapted by TopicDataAdapter
+     * inputData:
      * options:  Javascript object with the fields:
      *     titleParam:  the title to appear on the chart
      *     xParam: name of the field in inputData to treat as x values
@@ -219,7 +219,9 @@ function Datagrid(inputData, options) {
 
     function validateOptions() {
         var requiredOptions = {"xParam": false, "yParam": false, "datafield": false},
-            missing;
+            missing,
+            opt;
+
         for (opt in requiredOptions) {
             requiredOptions[opt] = requiredOptions[opt] in gridOptions;
         }
