@@ -1,13 +1,25 @@
 var assert = chai.assert,
     expect = chai.expect,
-    should = chai.should(),
-    datagrid;
+    should = chai.should();
 
 describe("Datagrid tests", function() {
+    var suite;
+
+    beforeEach(function () {
+        suite = {};
+        suite.sandbox = sinon.sandbox.create();
+    });
+
+    afterEach(function() {
+        suite.sandbox.restore();
+        suite = null;
+        datagrid = null;
+    });
+
     it("Fails as expected with no data", function () {
-        datagrid = new Datagrid({}, {});
+        suite.datagrid = new Datagrid({}, {});
         try {
-            datagrid.initializeGrid();
+            suite.datagrid.initializeGrid();
             assert.isNotOk(true, 'Expected error not thrown');
         } catch (e) {
             assert.isOk(true, 'Caught expected error');
@@ -20,25 +32,41 @@ describe("Datagrid tests", function() {
             },
             maps: {}
         };
-        datagrid = new Datagrid(gridSource, {});
-        datagrid.initializeGrid();
-        var $generatedHtml = datagrid.generateView('No Caption');
+        suite.datagrid = new Datagrid(gridSource, {});
+        suite.datagrid.initializeGrid();
+        var $generatedHtml = suite.datagrid.generateView('No Caption');
         assert.equal($generatedHtml.find('table').length, 1);
         assert.equal($generatedHtml.find('table tr').length, 1);
         assert.equal($generatedHtml.find('table tr th').html(), '');
     });
-    it("Reports incomplete options", function () {
-        sinon.spy(console, 'error');
+    describe('Tests for acceptable options', function() {
+        beforeEach(function() {
+            suite.sandbox.spy(console, 'error');
+        });
+        it("Accepts good options", function () {
+            var gridSource = {
+                data: {
+                    rows: [],
+                },
+                maps: {}
+            };
+            var badOptions = {xParam: 'foo', yParam: 'bar', titleParam: 'wow'};
+            suite.datagrid = new Datagrid(gridSource, badOptions);
+            expect(console.error).not.to.have.been.called;
+        });
+        it("Complains about bad options", function () {
 
-        var gridSource = {
-            data: {
-                rows: [],
-            },
-            maps: {}
-        };
-        var badOptions = {};
-        datagrid = new Datagrid(gridSource, badOptions);
-        expect(console.error).to.have.been.called;
+            var gridSource = {
+                data: {
+                    rows: [],
+                },
+                maps: {}
+            };
+            var badOptions = {};
+            suite.datagrid = new Datagrid(gridSource, badOptions);
+            expect(console.error).to.have.been.called;
+        });
+
     });
     it("Outputs expected map data", function () {
         var chosenCityKey = "cityKey1";
@@ -80,13 +108,13 @@ describe("Datagrid tests", function() {
                 }
             }
         };
-        datagrid = new Datagrid(sampleData, gridOptions);
-        datagrid.initializeGrid();
+        suite.datagrid = new Datagrid(sampleData, gridOptions);
+        suite.datagrid.initializeGrid();
 
-        var $generatedHtml = datagrid.generateView(sampleData.maps.geog[gridOptions.titleChoice].long);
-        assert.deepEqual(datagrid.mapToArray(gridOptions.xParam, 'long'), [{"long": yearLongName,"key": "1996Key1","short": yearShortName}]);
-        assert.deepEqual(datagrid.mapToArray(gridOptions.yParam, 'long'), [{long: 'City Revenue', short: 'Revenue', key: 'city_revenue'}]);
-        assert.deepEqual(datagrid.mapToArray(gridOptions.titleParam, 'long'), [
+        var $generatedHtml = suite.datagrid.generateView(sampleData.maps.geog[gridOptions.titleChoice].long);
+        assert.deepEqual(suite.datagrid.mapToArray(gridOptions.xParam, 'long'), [{"long": yearLongName,"key": "1996Key1","short": yearShortName}]);
+        assert.deepEqual(suite.datagrid.mapToArray(gridOptions.yParam, 'long'), [{long: 'City Revenue', short: 'Revenue', key: 'city_revenue'}]);
+        assert.deepEqual(suite.datagrid.mapToArray(gridOptions.titleParam, 'long'), [
             {
                 "key": "cityKey2",
                 "long": "The City of Brisbane",
@@ -103,7 +131,6 @@ describe("Datagrid tests", function() {
                 "short": "San Diego"
             }
         ]);
-        console.log('html = ' + $generatedHtml.html());
         assert.equal(sampleData.maps.geog[gridOptions.titleChoice].long, tableCaption);
         assert.equal($generatedHtml.find('table').length, 1);
         assert.equal($generatedHtml.find('table caption').html(), tableCaption);

@@ -3,13 +3,11 @@
     <head>
         <title></title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-        <script src="navtree.js"></script>
         <script src="navtreePage.js"></script>
         <script src="sampleData.js"></script>
         <script src="../datagrid.js"></script>
-        <link rel="stylesheet" href="regional-main.css">
+        <link rel="stylesheet" href="demo.css">
         <script>
-            var navtree = new Navtree();
             var navtreePage = new NavtreePage();
             var rotationLabels = ["By Topic", "By Time Period", "By Geography"];
             navtreePage.init();
@@ -17,7 +15,6 @@
             $(document).ready(function() {
 
                 $("a#makegrid").click(function () {
-                    console.log('makegrid');
                     navtreePage.makeDatagrid(sampleData);
                 });
 

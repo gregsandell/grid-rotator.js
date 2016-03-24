@@ -218,14 +218,13 @@ function Datagrid(inputData, options) {
     };
 
     function validateOptions() {
-        var requiredOptions = {"xParam": false, "yParam": false, "datafield": false},
+        var requiredOptions = {"xParam": false, "yParam": false, "titleParam": false},
             missing,
             opt;
 
         for (opt in requiredOptions) {
-            requiredOptions[opt] = requiredOptions[opt] in gridOptions;
+            requiredOptions[opt] = opt in gridOptions;
         }
-        console.log('requireOptions now ', requiredOptions);
         missing = $.map(Object.keys(requiredOptions), function(opt) {
             return !requiredOptions[opt] ? ("'" + opt + "'") : null;
         });
