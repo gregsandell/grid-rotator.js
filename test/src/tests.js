@@ -31,6 +31,11 @@ QUnit.test( "Outputs empty table with empty data", function( assert ) {
     assert.equal($generatedHtml.find('table tr').length, 1);
     assert.equal($generatedHtml.find('table tr th').html(), '');
 });
+QUnit.test("Reports incomplete options", function( assert ) {
+    var badOptions = {};
+    datagrid = new Datagrid(gridSource, badOptions);
+});
+
 QUnit.test("Outputs expected map data", function( assert ) {
     var chosenCityKey = "cityKey1";
     var chosenValue = "9";

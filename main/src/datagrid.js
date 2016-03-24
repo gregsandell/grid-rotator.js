@@ -1,7 +1,16 @@
 function Datagrid(inputData, options) {
     var gridSource = inputData;
+    var gridOptions;
+
+    this.setOptions = function(_options) {
+        gridOptions = _options;
+        validateOptions();
+    };
+
+    this.setOptions(options);
+
     var gridResult = {};
-    var gridOptions = options;
+
     var self = this;
 
     //console.log('datagrid constructor, options = ', options);
@@ -19,8 +28,7 @@ function Datagrid(inputData, options) {
         gridResult = generateGrid();
         //console.log('gridResult is now: ' + JSON.stringify(gridResult));
         return gridResult;
-    }
-
+    };
     /*
      * It's easier to iterate through an array than a hashmap.  This returns an "array version" of a hashmap.
      */
@@ -29,13 +37,13 @@ function Datagrid(inputData, options) {
         var keys = [];
         var okDimensions = [gridOptions.titleParam, gridOptions.xParam, gridOptions.yParam];
         if ($.inArray(dimension, okDimensions) == -1) {
-            console.log('No such dimension \'' + dimension + '\'.  Acceptable values are ' +
+            console.error('Datagrid error:  No such dimension \'' + dimension + '\'.  Acceptable values are ' +
                 okDimensions.join(', ') + '.  Defaulting to \'' + gridOptions.titleParam + '\'');
             dimension = gridOptions.titleParam;
         }
         var okTypes = ['key', 'long', 'short'];
         if ($.inArray(sortType, okTypes) == -1) {
-            console.log('No such type \'' + sortType + '\'.  Acceptable values are ' +
+            console.error('Datagrid error:  No such type \'' + sortType + '\'.  Acceptable values are ' +
                 okTypes.join(', ') + '.  Defaulting to \'' + short + '\'');
             sortType = 'short';
         }
@@ -208,5 +216,22 @@ function Datagrid(inputData, options) {
         });
         return result;
     };
+
+    function validateOptions() {
+        var requiredOptions = {"xParam": false, "yParam": false, "datafield": false},
+            missing;
+        for (opt in requiredOptions) {
+            requiredOptions[opt] = requiredOptions[opt] in gridOptions;
+        }
+        console.log('requireOptions now ', requiredOptions);
+        missing = $.map(Object.keys(requiredOptions), function(opt) {
+            return !requiredOptions[opt] ? ("'" + opt + "'") : null;
+        });
+        if (missing.length > 0) {
+            var optList = [missing.slice(0, -1).join(', '), missing.slice(-1)[0]].join(missing.length < 2 ? '' : ' and ');
+            var s = 'Datagrid error:  Required fields ' + optList + ' are missing from the options object, so Datagrid will fail.';
+            console.error(s);
+        }
+    }
 
 };
