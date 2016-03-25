@@ -17,21 +17,21 @@ function NavtreePage() {
         this.flipCount = 0;
     };
 
-    this.makeDatagrid = function(responseData) {    // public
+    this.makeDatagrid = function(responseData, params) {    // public
         //console.log('in makeDatagrid');
         var chartSubjectArray;
-        var gridOptions = { "xParam": "geog", "yParam": "timeperiod", "titleParam": "datafield", "suppressNAs": true};
+        var gridOptions = {"titleParam": params[0].key, "xParam": params[1].key, "yParam": params[2].key, "suppressNAs": true};
         var datagrid = new Datagrid(responseData, gridOptions);  // needed to make mapToArray calls
 
         if (this.rotationCount % 3 == 0) {
-            gridOptions = { "xParam": "geog", "yParam": "timeperiod", "titleParam": "datafield", "suppressNAs": true};
-            chartSubjectArray = datagrid.mapToArray('datafield', 'long');
+            gridOptions = {"titleParam": params[0].key, "xParam": params[1].key, "yParam": params[2].key, "suppressNAs": true};
+            chartSubjectArray = datagrid.mapToArray(params[0].key, 'long');
         } else if (this.rotationCount % 3 == 1) {
-            gridOptions = { "xParam": "geog", "yParam": "datafield", "titleParam": "timeperiod", "suppressNAs": true};
-            chartSubjectArray = datagrid.mapToArray('timeperiod', 'long');
+            gridOptions = {"titleParam": params[2].key, "xParam": params[0].key, "yParam": params[1].key, "suppressNAs": true};
+            chartSubjectArray = datagrid.mapToArray(params[2].key, 'long');
         } else if (this.rotationCount % 3 == 2) {
-            gridOptions = { "xParam": "datafield", "yParam": "timeperiod", "titleParam": "geog", "suppressNAs": true};
-            chartSubjectArray = datagrid.mapToArray('geog', 'long');
+            gridOptions = {"titleParam": params[2].key, "xParam": params[1].key, "yParam": params[0].key, "suppressNAs": true};
+            chartSubjectArray = datagrid.mapToArray(params[2].key, 'long');
         }
         //console.log('chartSubjectArray is ', chartSubjectArray);
         if (this.flipCount % 2 == 1) {

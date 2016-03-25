@@ -1,4 +1,4 @@
-var sampleData = {
+var countiesSample = {
     "data": {
         "rows": [
             {

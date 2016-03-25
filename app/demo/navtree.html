@@ -4,32 +4,62 @@
         <title></title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="navtreePage.js"></script>
-        <script src="sampleData.js"></script>
+        <script src="countiesSample.js"></script>
+        <script src="hairEyeSexSample.js"></script>
         <script src="../datagrid.js"></script>
         <link rel="stylesheet" href="demo.css">
         <script>
             var navtreePage = new NavtreePage();
             var rotationLabels = ["By Topic", "By Time Period", "By Geography"];
+            var datasets = {
+                countiesSample: {
+                    data: countiesSample,
+                    params: [
+                        {key: 'datafield', label: "By Topic"},
+                        {key: 'timeperiod', label: "By Time Period"},
+                        {key: 'geog', label: "By Geography"}
+                    ],
+                    desc: 'Pretend data'
+                },
+                hairEyeSexSample: {
+                    data: hairEyeSexSample,
+                    params: [
+                        {key: 'sex', label: "By Gender"},
+                        {key: 'hair', label: "By Hair Color"},
+                        {key: 'eyes', label: "By Eye Color"}
+                    ],
+                    desc: "Source:  Hair and Eye Color of Statistics Students from https://vincentarelbundock.github.io/Rdatasets/datasets.html"
+                }
+            };
+            var sampleData = datasets.hairEyeSexSample;
             navtreePage.init();
 
             $(document).ready(function() {
 
+
                 $("a#makegrid").click(function () {
-                    navtreePage.makeDatagrid(sampleData);
+                    navtreePage.makeDatagrid(sampleData.data, sampleData.params);
                 });
 
                 $("a#flipxy").click(function () {
                     ++navtreePage.flipCount;
                     $("#datapageView .pagedata").html("");
-                    navtreePage.makeDatagrid(sampleData);
+                    navtreePage.makeDatagrid(sampleData.data, sampleData.params);
                 });
 
                 $("a#rotate").click(function () {
                     ++navtreePage.rotationCount;
                     $("#datapageView .pagedata").html("");
-                    $("#rotateLabel").text(rotationLabels[navtreePage.rotationCount % 3]);
-                    navtreePage.makeDatagrid(sampleData);
+                    $("#rotateLabel").text(sampleData.params[navtreePage.rotationCount % 3].label);
+                    navtreePage.makeDatagrid(sampleData.data, sampleData.params);
                 });
+
+                $('select#dataSelect').change(function() {
+//                    console.log('changed to ' + $(this).val());
+                    $("#datapageView .pagedata").html("");
+                    sampleData = datasets[$(this).val()];
+                });
+
             });
 
 
@@ -46,6 +76,11 @@
     <body>
         <div id="datapageView" class="datapage regular">
             <div class="pagecontrols clearfix">
+                <label name="dataSelect">Dataset: </label>
+                <select id="dataSelect">
+                    <option value="hairEyeSexSample" selected>Hair &amp; Eye color by gender</option>
+                    <option value="countiesSample">Los Angeles County UFOs</option>
+                </select>
                 <a id="makegrid" class="multi grid selected">Grid</a>
                 <div id="gridOrientationControls" class="rightside">
                     <span id="rotateLabel" class="label"></span>
