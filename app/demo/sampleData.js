@@ -5,1093 +5,1093 @@ var sampleData = {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1996",
                 "value": "9",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1996",
                 "value": "0",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1996",
                 "value": "0",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1996",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1996",
                 "value": "1",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1996",
                 "value": "0",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1996",
                 "value": "0",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",   // Arts-Culture Establishments, as Pct.of All Establishments
+                "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1996",
                 "value": "9",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1996",
                 "value": "0",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1996",
                 "value": "0",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1996",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1996",
                 "value": "1",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1996",
                 "value": "0",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1996",
                 "value": "0",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1997",
                 "value": "61",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1997",
                 "value": "8",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1997",
                 "value": "2",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1997",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1997",
                 "value": "4",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1997",
                 "value": "3",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1997",
                 "value": "0",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1997",
                 "value": "61",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1997",
                 "value": "8",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1997",
                 "value": "2",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1997",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1997",
                 "value": "4",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1997",
                 "value": "3",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1997",
                 "value": "0",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1998",
                 "value": "91",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1998",
                 "value": "13",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1998",
                 "value": "2",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1998",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1998",
                 "value": "8",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1998",
                 "value": "1",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1998",
                 "value": "2",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1998",
                 "value": "91",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1998",
                 "value": "13",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1998",
                 "value": "2",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1998",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1998",
                 "value": "8",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1998",
                 "value": "1",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1998",
                 "value": "2",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1999",
                 "value": "89",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1999",
                 "value": "14",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1999",
                 "value": "3",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1999",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1999",
                 "value": "11",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1999",
                 "value": "4",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "1999",
                 "value": "4",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1999",
                 "value": "89",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1999",
                 "value": "14",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1999",
                 "value": "3",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1999",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1999",
                 "value": "11",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1999",
                 "value": "4",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "1999",
                 "value": "4",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2000",
                 "value": "96",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2000",
                 "value": "21",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2000",
                 "value": "7",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2000",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2000",
                 "value": "10",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2000",
                 "value": "1",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2000",
                 "value": "5",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2000",
                 "value": "96",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2000",
                 "value": "21",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2000",
                 "value": "7",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2000",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2000",
                 "value": "10",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2000",
                 "value": "1",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2000",
                 "value": "5",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2001",
                 "value": "121",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2001",
                 "value": "10",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2001",
                 "value": "3",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2001",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2001",
                 "value": "11",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2001",
                 "value": "0",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2001",
                 "value": "2",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2001",
                 "value": "121",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2001",
                 "value": "10",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2001",
                 "value": "3",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2001",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2001",
                 "value": "11",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2001",
                 "value": "0",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2001",
                 "value": "2",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2002",
                 "value": "126",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2002",
                 "value": "16",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2002",
                 "value": "12",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2002",
                 "value": "2",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2002",
                 "value": "3",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2002",
                 "value": "2",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2002",
                 "value": "4",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2002",
                 "value": "126",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2002",
                 "value": "16",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2002",
                 "value": "12",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2002",
                 "value": "2",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2002",
                 "value": "3",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2002",
                 "value": "2",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2002",
                 "value": "4",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2003",
                 "value": "142",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2003",
                 "value": "12",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2003",
                 "value": "7",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2003",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2003",
                 "value": "12",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2003",
                 "value": "4",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2003",
                 "value": "6",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2004",
                 "value": "138",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2004",
                 "value": "13",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2004",
                 "value": "7",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2004",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2004",
                 "value": "10",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2004",
                 "value": "6",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2004",
                 "value": "4",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2005",
                 "value": "177",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2005",
                 "value": "16",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2005",
                 "value": "4",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2005",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2005",
                 "value": "12",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2005",
                 "value": "4",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2005",
                 "value": "3",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2006",
                 "value": "188",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2006",
                 "value": "23",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2006",
                 "value": "2",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2006",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2006",
                 "value": "21",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2006",
                 "value": "7",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2006",
                 "value": "7",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2007",
                 "value": "203",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2007",
                 "value": "34",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2007",
                 "value": "12",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2007",
                 "value": "3",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2007",
                 "value": "25",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2007",
                 "value": "7",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2007",
                 "value": "11",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2003",
                 "value": "142",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2003",
                 "value": "12",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2003",
                 "value": "7",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2003",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2003",
                 "value": "12",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2003",
                 "value": "4",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2003",
                 "value": "6",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2004",
                 "value": "138",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2004",
                 "value": "13",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2004",
                 "value": "7",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2004",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2004",
                 "value": "10",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2004",
                 "value": "6",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2004",
                 "value": "4",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2005",
                 "value": "177",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2005",
                 "value": "16",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2005",
                 "value": "4",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2005",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2005",
                 "value": "12",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2005",
                 "value": "4",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2005",
                 "value": "3",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2006",
                 "value": "188",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2006",
                 "value": "23",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2006",
                 "value": "2",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2006",
                 "value": "0",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2006",
                 "value": "21",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2006",
                 "value": "7",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2006",
                 "value": "7",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2007",
                 "value": "203",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2007",
                 "value": "34",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2007",
                 "value": "12",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2007",
                 "value": "3",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2007",
                 "value": "25",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2007",
                 "value": "7",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2007",
                 "value": "11",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2009",
                 "value": "3",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2009",
                 "value": "2",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2009",
                 "value": "2",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2009",
                 "value": "2",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2009",
                 "value": "3",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2009",
                 "value": "2",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "ARTESTBPC_ARTPCESTAB",
                 "timeperiod": "2009",
                 "value": "2",
-                "geog": "17197"
+                "geog": "ALAM"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2009",
                 "value": "3",
-                "geog": "17031"
+                "geog": "MERC"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2009",
                 "value": "2",
-                "geog": "17043"
+                "geog": "MARI"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2009",
                 "value": "2",
-                "geog": "17089"
+                "geog": "LOSA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2009",
                 "value": "2",
-                "geog": "17093"
+                "geog": "INYO"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2009",
                 "value": "3",
-                "geog": "17097"
+                "geog": "FRES"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2009",
                 "value": "2",
-                "geog": "17111"
+                "geog": "CALA"
             },
             {
                 "datafield": "NUMNFRLETTER",
                 "timeperiod": "2009",
                 "value": "2",
-                "geog": "17197"
+                "geog": "ALAM"
             }
 
         ]
@@ -1162,33 +1162,33 @@ var sampleData = {
             }
         },
         "geog": {
-            "17031": {
-                "short": "Cook",
-                "long": "Cook"
+            "MERC": {
+                "short": "Merced",
+                "long": "Merced County"
             },
-            "17043": {
-                "short": "DuPage",
-                "long": "DuPage"
+            "MARI": {
+                "short": "Marin",
+                "long": "Marin County"
             },
-            "17089": {
-                "short": "Kane",
-                "long": "Kane"
+            "LOSA": {
+                "short": "Los Angeles",
+                "long": "Los Angeles County"
             },
-            "17093": {
-                "short": "Kendall",
-                "long": "Kendall"
+            "INYO": {
+                "short": "Inyo",
+                "long": "Inyo County"
             },
-            "17097": {
-                "short": "Lake",
-                "long": "Lake"
+            "FRES": {
+                "short": "Fresno",
+                "long": "Fresno County"
             },
-            "17111": {
-                "short": "McHenry",
-                "long": "McHenry"
+            "CALA": {
+                "short": "Calaveras",
+                "long": "Calaveras County"
             },
-            "17197": {
-                "short": "Will",
-                "long": "Will"
+            "ALAM": {
+                "short": "Alameda",
+                "long": "Alameda County"
             }
         }
     }
