@@ -19,7 +19,7 @@ describe("Datagrid tests", function() {
     it("Fails as expected with no data", function () {
         suite.datagrid = new Datagrid({}, {});
         try {
-            suite.datagrid.initializeGrid();
+            suite.datagrid.init();
             assert.isNotOk(true, 'Expected error not thrown');
         } catch (e) {
             assert.isOk(true, 'Caught expected error');
@@ -33,7 +33,7 @@ describe("Datagrid tests", function() {
             maps: {}
         };
         suite.datagrid = new Datagrid(gridSource, {});
-        suite.datagrid.initializeGrid();
+        suite.datagrid.init();
         var $generatedHtml = suite.datagrid.generateView('No Caption');
         assert.equal($generatedHtml.find('table').length, 1);
         assert.equal($generatedHtml.find('table tr').length, 1);
@@ -50,7 +50,7 @@ describe("Datagrid tests", function() {
                 },
                 maps: {}
             };
-            var badOptions = {xParam: 'foo', yParam: 'bar', titleParam: 'wow'};
+            var badOptions = {xParam: 'foo', yParam: 'bar', topicParam: 'wow'};
             suite.datagrid = new Datagrid(gridSource, badOptions);
             expect(console.error).not.to.have.been.called;
         });
@@ -75,7 +75,7 @@ describe("Datagrid tests", function() {
         var yearLongName = 'The Year of 1996';
         var yearShortName = '1996';
         var datafieldLongName = 'City Revenue';
-        var gridOptions = { "yParam": "datafield", "xParam": "timeperiod", "titleParam": "geog", "titleChoice": chosenCityKey, "suppressNAs": true};
+        var gridOptions = { "yParam": "datafield", "xParam": "timeperiod", "topicParam": "geog", "topicSelected": chosenCityKey, "suppressNAs": true};
         var sampleData = {
             "data": {
                 "rows": [
@@ -109,12 +109,12 @@ describe("Datagrid tests", function() {
             }
         };
         suite.datagrid = new Datagrid(sampleData, gridOptions);
-        suite.datagrid.initializeGrid();
+        suite.datagrid.init();
 
-        var $generatedHtml = suite.datagrid.generateView(sampleData.maps.geog[gridOptions.titleChoice].long);
+        var $generatedHtml = suite.datagrid.generateView(sampleData.maps.geog[gridOptions.topicSelected].long);
         assert.deepEqual(suite.datagrid.mapToArray(gridOptions.xParam, 'long'), [{"long": yearLongName,"key": "1996Key1","short": yearShortName}]);
         assert.deepEqual(suite.datagrid.mapToArray(gridOptions.yParam, 'long'), [{long: 'City Revenue', short: 'Revenue', key: 'city_revenue'}]);
-        assert.deepEqual(suite.datagrid.mapToArray(gridOptions.titleParam, 'long'), [
+        assert.deepEqual(suite.datagrid.mapToArray(gridOptions.topicParam, 'long'), [
             {
                 "key": "cityKey2",
                 "long": "The City of Brisbane",
@@ -131,7 +131,7 @@ describe("Datagrid tests", function() {
                 "short": "San Diego"
             }
         ]);
-        assert.equal(sampleData.maps.geog[gridOptions.titleChoice].long, tableCaption);
+        assert.equal(sampleData.maps.geog[gridOptions.topicSelected].long, tableCaption);
         assert.equal($generatedHtml.find('table').length, 1);
         assert.equal($generatedHtml.find('table caption').html(), tableCaption);
         assert.equal($generatedHtml.find('table tr').length, 2);

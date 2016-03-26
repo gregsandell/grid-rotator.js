@@ -1,1110 +1,1109 @@
-var countiesSample = {
+var ufoSample = {
     "data": {
         "rows": [
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1996",
-                "value": "9",
+                "value": 28,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1996",
-                "value": "0",
+                "value": 26,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1996",
-                "value": "0",
+                "value": 44,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1996",
-                "value": "0",
+                "value": 3,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1996",
-                "value": "1",
+                "value": 39,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1996",
-                "value": "0",
+                "value": 10,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1996",
-                "value": "0",
+                "value": 5,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1996",
-                "value": "9",
+                "value": 3,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1996",
-                "value": "0",
+                "value": 44,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1996",
-                "value": "0",
+                "value": 21,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1996",
-                "value": "0",
+                "value": 36,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1996",
-                "value": "1",
+                "value": 12,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1996",
-                "value": "0",
+                "value": 9,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1996",
-                "value": "0",
+                "value": 15,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1997",
-                "value": "61",
+                "value": 31,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1997",
-                "value": "8",
+                "value": 12,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1997",
-                "value": "2",
+                "value": 31,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1997",
-                "value": "0",
+                "value": 22,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1997",
-                "value": "4",
+                "value": 42,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1997",
-                "value": "3",
+                "value": 44,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1997",
-                "value": "0",
+                "value": 13,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1997",
-                "value": "61",
+                "value": 49,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1997",
-                "value": "8",
+                "value": 35,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1997",
-                "value": "2",
+                "value": 3,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1997",
-                "value": "0",
+                "value": 43,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1997",
-                "value": "4",
+                "value": 4,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1997",
-                "value": "3",
+                "value": 6,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1997",
-                "value": "0",
+                "value": 21,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1998",
-                "value": "91",
+                "value": 3,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1998",
-                "value": "13",
+                "value": 1,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1998",
-                "value": "2",
+                "value": 18,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1998",
-                "value": "0",
+                "value": 2,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1998",
-                "value": "8",
+                "value": 1,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1998",
-                "value": "1",
+                "value": 17,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1998",
-                "value": "2",
+                "value": 37,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1998",
-                "value": "91",
+                "value": 1,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1998",
-                "value": "13",
+                "value": 26,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1998",
-                "value": "2",
+                "value": 31,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1998",
-                "value": "0",
+                "value": 3,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1998",
-                "value": "8",
+                "value": 39,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1998",
-                "value": "1",
+                "value": 37,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1998",
-                "value": "2",
+                "value": 23,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1999",
-                "value": "89",
+                "value": 26,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1999",
-                "value": "14",
+                "value": 28,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1999",
-                "value": "3",
+                "value": 5,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1999",
-                "value": "0",
+                "value": 11,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1999",
-                "value": "11",
+                "value": 3,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1999",
-                "value": "4",
+                "value": 46,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "1999",
-                "value": "4",
+                "value": 28,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1999",
-                "value": "89",
+                "value": 10,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1999",
-                "value": "14",
+                "value": 21,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1999",
-                "value": "3",
+                "value": 45,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1999",
-                "value": "0",
+                "value": 13,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1999",
-                "value": "11",
+                "value": 48,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1999",
-                "value": "4",
+                "value": 41,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "1999",
-                "value": "4",
+                "value": 33,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2000",
-                "value": "96",
+                "value": 3,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2000",
-                "value": "21",
+                "value": 38,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2000",
-                "value": "7",
+                "value": 25,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2000",
-                "value": "0",
+                "value": 47,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2000",
-                "value": "10",
+                "value": 11,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2000",
-                "value": "1",
+                "value": 35,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2000",
-                "value": "5",
+                "value": 13,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2000",
-                "value": "96",
+                "value": 41,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2000",
-                "value": "21",
+                "value": 43,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2000",
-                "value": "7",
+                "value": 32,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2000",
-                "value": "0",
+                "value": 10,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2000",
-                "value": "10",
+                "value": 21,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2000",
-                "value": "1",
+                "value": 40,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2000",
-                "value": "5",
+                "value": 50,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2001",
-                "value": "121",
+                "value": 24,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2001",
-                "value": "10",
+                "value": 36,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2001",
-                "value": "3",
+                "value": 33,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2001",
-                "value": "0",
+                "value": 28,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2001",
-                "value": "11",
+                "value": 1,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2001",
-                "value": "0",
+                "value": 39,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2001",
-                "value": "2",
+                "value": 40,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2001",
-                "value": "121",
+                "value": 3,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2001",
-                "value": "10",
+                "value": 11,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2001",
-                "value": "3",
+                "value": 48,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2001",
-                "value": "0",
+                "value": 12,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2001",
-                "value": "11",
+                "value": 13,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2001",
-                "value": "0",
+                "value": 42,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2001",
-                "value": "2",
+                "value": 44,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2002",
-                "value": "126",
+                "value": 43,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2002",
-                "value": "16",
+                "value": 40,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2002",
-                "value": "12",
+                "value": 33,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2002",
-                "value": "2",
+                "value": 12,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2002",
-                "value": "3",
+                "value": 14,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2002",
-                "value": "2",
+                "value": 32,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2002",
-                "value": "4",
+                "value": 21,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2002",
-                "value": "126",
+                "value": 0,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2002",
-                "value": "16",
+                "value": 35,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2002",
-                "value": "12",
+                "value": 37,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2002",
-                "value": "2",
+                "value": 50,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2002",
-                "value": "3",
+                "value": 47,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2002",
-                "value": "2",
+                "value": 26,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2002",
-                "value": "4",
+                "value": 33,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2003",
-                "value": "142",
+                "value": 37,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2003",
-                "value": "12",
+                "value": 50,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2003",
-                "value": "7",
+                "value": 41,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2003",
-                "value": "0",
+                "value": 36,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2003",
-                "value": "12",
+                "value": 19,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2003",
-                "value": "4",
+                "value": 15,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2003",
-                "value": "6",
+                "value": 47,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2004",
-                "value": "138",
+                "value": 3,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2004",
-                "value": "13",
+                "value": 34,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2004",
-                "value": "7",
+                "value": 37,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2004",
-                "value": "0",
+                "value": 36,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2004",
-                "value": "10",
+                "value": 26,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2004",
-                "value": "6",
+                "value": 15,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2004",
-                "value": "4",
+                "value": 43,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2005",
-                "value": "177",
+                "value": 50,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2005",
-                "value": "16",
+                "value": 14,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2005",
-                "value": "4",
+                "value": 20,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2005",
-                "value": "0",
+                "value": 17,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2005",
-                "value": "12",
+                "value": 25,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2005",
-                "value": "4",
+                "value": 2,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2005",
-                "value": "3",
+                "value": 37,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2006",
-                "value": "188",
+                "value": 38,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2006",
-                "value": "23",
+                "value": 41,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2006",
-                "value": "2",
+                "value": 16,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2006",
-                "value": "0",
+                "value": 10,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2006",
-                "value": "21",
+                "value": 24,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2006",
-                "value": "7",
+                "value": 0,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2006",
-                "value": "7",
+                "value": 22,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2007",
-                "value": "203",
+                "value": 28,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2007",
-                "value": "34",
+                "value": 50,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2007",
-                "value": "12",
+                "value": 33,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2007",
-                "value": "3",
+                "value": 13,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2007",
-                "value": "25",
+                "value": 5,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2007",
-                "value": "7",
+                "value": 19,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2007",
-                "value": "11",
+                "value": 21,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2003",
-                "value": "142",
+                "value": 20,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2003",
-                "value": "12",
+                "value": 15,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2003",
-                "value": "7",
+                "value": 27,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2003",
-                "value": "0",
+                "value": 50,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2003",
-                "value": "12",
+                "value": 28,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2003",
-                "value": "4",
+                "value": 47,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2003",
-                "value": "6",
+                "value": 7,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2004",
-                "value": "138",
+                "value": 44,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2004",
-                "value": "13",
+                "value": 41,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2004",
-                "value": "7",
+                "value": 32,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2004",
-                "value": "0",
+                "value": 24,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2004",
-                "value": "10",
+                "value": 12,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2004",
-                "value": "6",
+                "value": 10,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2004",
-                "value": "4",
+                "value": 33,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2005",
-                "value": "177",
+                "value": 36,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2005",
-                "value": "16",
+                "value": 10,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2005",
-                "value": "4",
+                "value": 47,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2005",
-                "value": "0",
+                "value": 0,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2005",
-                "value": "12",
+                "value": 30,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2005",
-                "value": "4",
+                "value": 23,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2005",
-                "value": "3",
+                "value": 50,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2006",
-                "value": "188",
+                "value": 17,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2006",
-                "value": "23",
+                "value": 34,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2006",
-                "value": "2",
+                "value": 18,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2006",
-                "value": "0",
+                "value": 30,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2006",
-                "value": "21",
+                "value": 21,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2006",
-                "value": "7",
+                "value": 42,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2006",
-                "value": "7",
+                "value": 50,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2007",
-                "value": "203",
+                "value": 46,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2007",
-                "value": "34",
+                "value": 8,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2007",
-                "value": "12",
+                "value": 18,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2007",
-                "value": "3",
+                "value": 31,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2007",
-                "value": "25",
+                "value": 5,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2007",
-                "value": "7",
+                "value": 22,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2007",
-                "value": "11",
+                "value": 27,
                 "geog": "ALAM"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2009",
-                "value": "3",
+                "value": 6,
                 "geog": "MERC"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2009",
-                "value": "2",
+                "value": 30,
                 "geog": "MARI"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2009",
-                "value": "2",
+                "value": 26,
                 "geog": "LOSA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2009",
-                "value": "2",
+                "value": 39,
                 "geog": "INYO"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2009",
-                "value": "3",
+                "value": 39,
                 "geog": "FRES"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2009",
-                "value": "2",
+                "value": 19,
                 "geog": "CALA"
             },
             {
-                "datafield": "ARTESTBPC_ARTPCESTAB",
+                "incident": "ABDUCTION",
                 "timeperiod": "2009",
-                "value": "2",
+                "value": 27,
                 "geog": "ALAM"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2009",
-                "value": "3",
+                "value": 12,
                 "geog": "MERC"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2009",
-                "value": "2",
+                "value": 31,
                 "geog": "MARI"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2009",
-                "value": "2",
+                "value": 2,
                 "geog": "LOSA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2009",
-                "value": "2",
+                "value": 45,
                 "geog": "INYO"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2009",
-                "value": "3",
+                "value": 23,
                 "geog": "FRES"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2009",
-                "value": "2",
+                "value": 13,
                 "geog": "CALA"
             },
             {
-                "datafield": "NUMNFRLETTER",
+                "incident": "SIGHTING",
                 "timeperiod": "2009",
-                "value": "2",
+                "value": 17,
                 "geog": "ALAM"
             }
-
         ]
     },
     maps: {
-        "datafield": {
-            "ARTESTBPC_ARTPCESTAB": {
-                "short": "ARTESTBPC_ARTPCESTAB",
-                "long": "ARTESTBPC_ARTPCESTAB"
+        "incident": {
+            "ABDUCTION": {
+                "short": "Abductions",
+                "long": "UFO Abductions"
             },
-            "NUMNFRLETTER": {
-                "short": "NUMNFRLETTER",
-                "long": "NUMNFRLETTER"
+            "SIGHTING": {
+                "short": "Sightings",
+                "long": "UFO Sightings"
             }
         },
         "timeperiod": {

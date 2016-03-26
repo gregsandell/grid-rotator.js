@@ -17,42 +17,53 @@ function NavtreePage() {
         this.flipCount = 0;
     };
 
-    this.makeDatagrid = function(responseData, params) {    // public
-        //console.log('in makeDatagrid');
-        var chartSubjectArray;
-        var gridOptions = {"titleParam": params[0].key, "xParam": params[1].key, "yParam": params[2].key, "suppressNAs": true};
-        var datagrid = new Datagrid(responseData, gridOptions);  // needed to make mapToArray calls
+    //this.makeDatagrid = function(responseData, params) {    // public
+    this.makeDatagrid = function(dataset) {    // public
+        var chartSubjectArray,
+            data = dataset.data,
+            params = dataset.params,
+            gridOptions = {"topicParam": params[0].key, "xParam": params[1].key, "yParam": params[2].key, "suppressNAs": true},
+            datagrid = new Datagrid(data, gridOptions),  // needed to make mapToArray calls
+            xParam,
+            yParam;
 
         if (this.rotationCount % 3 == 0) {
-            gridOptions = {"titleParam": params[0].key, "xParam": params[1].key, "yParam": params[2].key, "suppressNAs": true};
+            gridOptions = {"topicParam": params[0].key, "xParam": params[1].key, "yParam": params[2].key, "suppressNAs": true};
             chartSubjectArray = datagrid.mapToArray(params[0].key, 'long');
         } else if (this.rotationCount % 3 == 1) {
-            gridOptions = {"titleParam": params[2].key, "xParam": params[0].key, "yParam": params[1].key, "suppressNAs": true};
+            gridOptions = {"topicParam": params[2].key, "xParam": params[0].key, "yParam": params[1].key, "suppressNAs": true};
             chartSubjectArray = datagrid.mapToArray(params[2].key, 'long');
         } else if (this.rotationCount % 3 == 2) {
-            gridOptions = {"titleParam": params[2].key, "xParam": params[1].key, "yParam": params[0].key, "suppressNAs": true};
-            chartSubjectArray = datagrid.mapToArray(params[2].key, 'long');
+            gridOptions = {"topicParam": params[1].key, "xParam": params[2].key, "yParam": params[0].key, "suppressNAs": true};
+            chartSubjectArray = datagrid.mapToArray(params[1].key, 'long');
         }
         //console.log('chartSubjectArray is ', chartSubjectArray);
         if (this.flipCount % 2 == 1) {
             /* Swap 'em */
-            var xParam = gridOptions.xParam;
-            var yParam = gridOptions.yParam;
+            xParam = gridOptions.xParam;
+            yParam = gridOptions.yParam;
             gridOptions.xParam = yParam;
             gridOptions.yParam = xParam;
         }
-        $("#datapageView .pagedata").html("");
+        this.clearPage();
 
         /* For each topic, output a grid. */
         $.each(chartSubjectArray, function(i, subject) {
-            /* Each grid shares the same options, except for its title */
-            gridOptions.titleChoice = subject.key;   // key is the only possible value here.
-            datagrid = new Datagrid(responseData, gridOptions);
-            datagrid.initializeGrid();
-            var table = datagrid.generateView((subject.long && subject.long != "") ? subject.long : subject.short);
+            var table,
+                tableCaption = (subject.long && subject.long != "") ? subject.long : subject.short;
 
-            $("#datapageView .pagedata").append(table);
+            /* Each grid shares the same options, except for its title */
+            gridOptions.topicSelected = subject.key;   // key is the only possible value here.
+            datagrid = new Datagrid(data, gridOptions);
+            datagrid.init();
+            table = datagrid.generateView(tableCaption);
+
+            $("#datapageView #grids").append(table);
         });
+    };
+
+    this.clearPage = function() {
+        $("#datapageView #grids").html("");
     };
 
 }

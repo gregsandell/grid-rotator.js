@@ -1,6 +1,8 @@
 function Datagrid(inputData, options) {
-    var gridSource = inputData;
-    var gridOptions;
+    var gridSource = inputData,
+        gridOptions,
+        gridResult = {},
+        self = this;
 
     this.setOptions = function(_options) {
         gridOptions = _options;
@@ -9,51 +11,51 @@ function Datagrid(inputData, options) {
 
     this.setOptions(options);
 
-    var gridResult = {};
-
-    var self = this;
-
     //console.log('datagrid constructor, options = ', options);
     /*
      * Arguments
      * inputData:
      * options:  Javascript object with the fields:
-     *     titleParam:  the title to appear on the chart
+     *     topicParam:  the title to appear on the chart
      *     xParam: name of the field in inputData to treat as x values
      *     yParam: name of the field in inputData to treat as y values
      *     suppressNAs:  if true, eliminate any row and any column consisting only of "n/a" values
      */
-    this.initializeGrid = function() {
+    this.init = function() {
 
         gridResult = generateGrid();
         //console.log('gridResult is now: ' + JSON.stringify(gridResult));
-        return gridResult;
+        //return gridResult;
     };
     /*
      * It's easier to iterate through an array than a hashmap.  This returns an "array version" of a hashmap.
      */
     this.mapToArray = function(dimension, sortType) {
-        var result = [];
-        var keys = [];
-        var okDimensions = [gridOptions.titleParam, gridOptions.xParam, gridOptions.yParam];
+        var result = [],
+            keys = [],
+            okDimensions = [gridOptions.topicParam, gridOptions.xParam, gridOptions.yParam],
+            okTypes = ['key', 'long', 'short'],
+            map = gridSource.maps[dimension],
+            keys = Object.keys(map);
+
         if ($.inArray(dimension, okDimensions) == -1) {
             console.error('Datagrid error:  No such dimension \'' + dimension + '\'.  Acceptable values are ' +
-                okDimensions.join(', ') + '.  Defaulting to \'' + gridOptions.titleParam + '\'');
-            dimension = gridOptions.titleParam;
+                okDimensions.join(', ') + '.  Defaulting to \'' + gridOptions.topicParam + '\'');
+            dimension = gridOptions.topicParam;
         }
-        var okTypes = ['key', 'long', 'short'];
+
         if ($.inArray(sortType, okTypes) == -1) {
             console.error('Datagrid error:  No such type \'' + sortType + '\'.  Acceptable values are ' +
                 okTypes.join(', ') + '.  Defaulting to \'' + short + '\'');
             sortType = 'short';
         }
-        var map = gridSource.maps[dimension];
-        keys = Object.keys(map);
+
         $.each(keys, function(idx, key) {
             var record = map[key];
             record.key = key;
             result.push(record);
         });
+
         result.sort(function(a, b) {
             if (a[sortType] < b[sortType]) {
                 return -1;
@@ -69,9 +71,10 @@ function Datagrid(inputData, options) {
      * Generate a ready-to-print grid dataset based on the options.
      */
     function generateGrid() {   // TO DO should use private gridOptions instead of arg
-        var xValues = [];
-        var yValues = [];
-        var result = {};
+        var xValues = [],
+            yValues = [],
+            result = {x: []},
+            rows = [];
 
         if (!gridSource || !gridSource.data || !gridSource.data.rows || !gridSource.maps) {
             throw "Minimal data input requirement not met";
@@ -102,7 +105,6 @@ function Datagrid(inputData, options) {
         //console.log('gridSource.data.rows is now ' + JSON.stringify(gridSource.data.rows));
 
         /* Prepare the data for the x-axis of the grid */
-        result.x = [];
         //console.log('gridOptions.xParam is ' + gridOptions.xParam);
         //console.log('loop going to iterate on xValues = ' + JSON.stringify(xValues));
         //console.log(gridOptions.xParam + ' map is' +  JSON.stringify(gridSource.maps[gridOptions.xParam]));
@@ -111,30 +113,31 @@ function Datagrid(inputData, options) {
             var short = gridSource.maps[gridOptions.xParam][xValue].short;
 
             /* Careful, the 'long' field sometimes comes back  */
-            result.x.push((short && short != "") ? short : long);
+            //result.x.push((short && short != "") ? short : long);
+            result.x.push((long && long != "") ? long : short);
         });
 
         //console.log('result.x is now: ' + JSON.stringify(result.x));
 
         /* Prepare the data for the y-axis of the grid */
-        var rows = [];
         $.each(yValues, function(i, yValue) {
-            var row = {};
-            var long = gridSource.maps[gridOptions.yParam][yValue].long;
-            var short = gridSource.maps[gridOptions.yParam][yValue].short;
+            var row = {},
+                long = gridSource.maps[gridOptions.yParam][yValue].long,
+                short = gridSource.maps[gridOptions.yParam][yValue].short,
+                values = [];
+
             row.y = (long && long != "") ? long : short;
-            var values = [];
             $.each(xValues, function(j, xValue) {
                 var v = "n/a";
                 //console.log('gridOptions before iterating on rows is ', gridOptions);
                 $.each(gridSource.data.rows, function(i, row) {
-                    //if (row[gridOptions.titleParam] == gridOptions.titleChoice) {
+                    //if (row[gridOptions.topicParam] == gridOptions.topicSelected) {
                     //    console.log('matching titles');
                     //} else {
-                    //    console.log('unmatching titles, ' + row[gridOptions.titleParam] + ' and ');
+                    //    console.log('unmatching titles, ' + row[gridOptions.topicParam] + ' and ');
                     //}
-                    //var s = 'row["' + gridOptions.titleParam + '"] (' + row[gridOptions.titleParam] + ') and titleChoice ("' + gridOptions.titleChoice + '") are ';
-                    //console.log(s + (row[gridOptions.titleParam] == gridOptions.titleChoice ? 'equal' : 'NOT equal'));
+                    //var s = 'row["' + gridOptions.topicParam + '"] (' + row[gridOptions.topicParam] + ') and topicSelected ("' + gridOptions.topicSelected + '") are ';
+                    //console.log(s + (row[gridOptions.topicParam] == gridOptions.topicSelected ? 'equal' : 'NOT equal'));
                     //s = 'row["' + gridOptions.xParam + '"] (' + row[gridOptions.xParam] + ') and xValue ("' + xValue + '") are ';
                     //console.log(s, (row[gridOptions.xParam] == xValue ? 'equal' : 'NOT equal'));
                     //s = 'row["' + gridOptions.yParam + '"] (' + row[gridOptions.yParam] + ') and yValue ("' + yValue + '") are ';
@@ -145,7 +148,7 @@ function Datagrid(inputData, options) {
                     //if (xValue == undefined) console.log('undefined xValue');
                     //if (row[gridOptions.yParam] == undefined) console.log('undefined ' + gridOptions.yParam + ' field in row');
                     //if (yValue == undefined) console.log('undefined yValue');
-                    if (row[gridOptions.titleParam] == gridOptions.titleChoice && row[gridOptions.xParam] == xValue && row[gridOptions.yParam] == yValue) {
+                    if (row[gridOptions.topicParam] == gridOptions.topicSelected && row[gridOptions.xParam] == xValue && row[gridOptions.yParam] == yValue) {
                         v = row.value;
                         //console.log('push');
                         values.push(v);
@@ -164,26 +167,29 @@ function Datagrid(inputData, options) {
         //console.log('in generate view, gridResult is ' + JSON.stringify(gridResult));
         var empties = findEmpties();
         var suppressNAs = gridOptions.suppressNAs != undefined && gridOptions.suppressNAs;
-        var dataview = $("<div>").addClass("dataview");
+        var dataview = $("<div class='datagrid'>");
         var table = $("<table>");
         var caption = $('<caption>').text(caption);
         table.append(caption);
-        var tbody = $('<tbody>');
+        var thead = $('<thead>');
         var tr = $("<tr>");
         tr.append($("<th>").text(""));
         $.each(gridResult.x, function(i, columnLabel) {
             if (suppressNAs && empties.x[i]) return true;
             tr.append($("<th>").text(columnLabel));
+            thead.append(tr);
         });
-        tbody.append(tr);
+        table.append(thead);
+        var tbody = $("<tbody>");
         /* This is a hack to keep users from seeing rows of all n/a's.  It only works in non-flipped view.
          * You'll see the n/a's in columns if you flip */
-        $.each(gridResult.rows, function(i, row) {
-            if (suppressNAs && empties.y[i]) return true;
-            tr = $("<tr>");
-            tr.append($("<th>").text(row.y));
-            $.each(row.v, function(i, value) {
-                if (suppressNAs && empties.x[i]) return true;
+        $.each(gridResult.rows, function(idx, row) {
+            if (suppressNAs && empties.y[idx]) return true;
+            var className = (idx % 2) == 1 ? 'alt' : '';
+            tr = $("<tr class='" + className + "''>");
+            tr.append($("<td>").text(row.y));
+            $.each(row.v, function(jdx, value) {
+                if (suppressNAs && empties.x[jdx]) return true;
                 tr.append($("<td>").text(value));
             });
             tbody.append(tr);
@@ -194,9 +200,7 @@ function Datagrid(inputData, options) {
     };
 
     function findEmpties() {
-        var result = {};
-        result.x = [];
-        result.y = [];
+        var result = {x: [], y: []};
 
         $.each(gridResult.x, function(i, x) {
             result.x[i] = true;
@@ -218,7 +222,7 @@ function Datagrid(inputData, options) {
     };
 
     function validateOptions() {
-        var requiredOptions = {"xParam": false, "yParam": false, "titleParam": false},
+        var requiredOptions = {"xParam": false, "yParam": false, "topicParam": false},
             missing,
             opt;
 
