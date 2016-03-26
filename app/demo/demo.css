@@ -89,7 +89,12 @@ a#flipxy {
 	z-index: 1;
 }
 
-
+.source {
+	font-style: italic;
+	clear: both;
+	padding-top: 10px;
+	text-align: center;
+}
 a {
 	color: #174479;
 	text-decoration: none;
