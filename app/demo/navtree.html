@@ -61,16 +61,19 @@
                     navtreePage.makeDatagrid(sampleData);
                 });
 
-                for (key in datasets) {
-                    if (datasets.hasOwnProperty(key)) {
-    //                        console.log('datasets["' + key + '"] = ' + JSON.stringify(datasets[key]));
-                        $('select#dataSelect').append($('<option />', {text: datasets[key].shortTitle, val: key}));
+                function init() {
+                    for (key in datasets) {
+                        if (datasets.hasOwnProperty(key)) {
+                            //                        console.log('datasets["' + key + '"] = ' + JSON.stringify(datasets[key]));
+                            $('select#dataSelect').append($('<option />', {text: datasets[key].shortTitle, val: key}));
+                        }
                     }
+                    //                console.log('selected: ' + $('select#dataSelect').val());
+                    sampleData = datasets[$('select#dataSelect').val()];
+                    navtreePage.makeDatagrid(sampleData);
                 }
-    //                console.log('selected: ' + $('select#dataSelect').val());
-                sampleData = datasets[$('select#dataSelect').val()];
-                $("#rotateLabel").html("Topic:<br>" + sampleData.params[0].label);
-                navtreePage.makeDatagrid(sampleData);
+
+                init();
             });
 
         </script>

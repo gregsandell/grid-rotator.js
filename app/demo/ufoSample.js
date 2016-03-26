@@ -1096,6 +1096,11 @@ var ufoSample = {
         ]
     },
     maps: {
+        "titles": {
+            "incident": "Incident",
+            "timeperiod": "Year",
+            "geog": "County"
+        },
         "incident": {
             "ABDUCTION": {
                 "short": "Abductions",

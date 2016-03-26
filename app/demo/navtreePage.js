@@ -30,14 +30,19 @@ function NavtreePage() {
         if (this.rotationCount % 3 == 0) {
             gridOptions = {"topicParam": params[0].key, "xParam": params[1].key, "yParam": params[2].key, "suppressNAs": true};
             chartSubjectArray = datagrid.mapToArray(params[0].key, 'long');
+            //console.log('rotation 0');
         } else if (this.rotationCount % 3 == 1) {
             gridOptions = {"topicParam": params[2].key, "xParam": params[0].key, "yParam": params[1].key, "suppressNAs": true};
             chartSubjectArray = datagrid.mapToArray(params[2].key, 'long');
+            //console.log('rotation 1');
         } else if (this.rotationCount % 3 == 2) {
             gridOptions = {"topicParam": params[1].key, "xParam": params[2].key, "yParam": params[0].key, "suppressNAs": true};
             chartSubjectArray = datagrid.mapToArray(params[1].key, 'long');
+            //console.log('rotation 2');
         }
-        //console.log('chartSubjectArray is ', chartSubjectArray);
+        //console.log('topicParam = ' + gridOptions.topicParam);
+        $("#rotateLabel").html("Topic:<br>" + data.maps.titles[gridOptions.topicParam]);
+        //console.log('chartSubjectArray is ' + JSON.stringify(chartSubjectArray));
         if (this.flipCount % 2 == 1) {
             /* Swap 'em */
             xParam = gridOptions.xParam;
@@ -56,8 +61,8 @@ function NavtreePage() {
             gridOptions.topicSelected = subject.key;   // key is the only possible value here.
             datagrid = new Datagrid(data, gridOptions);
             datagrid.init();
-            console.log('gridOptions = ' + JSON.stringify(gridOptions));
-            console.log('gridResult = ' + JSON.stringify(datagrid.getGridResult()));
+            //console.log('gridOptions = ' + JSON.stringify(gridOptions));
+            //console.log('gridResult = ' + JSON.stringify(datagrid.getGridResult()));
             table = datagrid.generateView(tableCaption);
 
             $("#datapageView #grids").append(table);

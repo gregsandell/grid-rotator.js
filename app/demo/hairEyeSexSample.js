@@ -196,6 +196,11 @@ var hairEyeSexSample = {
         ]
     },
     "maps": {
+        "titles": {
+            "hair": "Hair Color",
+            "eyes": "Eye Color",
+            "sex": "Gender"
+        },
         "hair": {
             "black": {
                 "short": "Black",
