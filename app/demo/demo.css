@@ -81,6 +81,14 @@ div.pagecontrols {
 	height: 23px;
 }
 
+a#rotate {
+	z-index: 0;
+}
+
+a#flipxy {
+	z-index: 1;
+}
+
 
 a {
 	color: #174479;
@@ -88,6 +96,7 @@ a {
 	font-weight: 700;
 }
 
+/* datagrid table stylying generated at http://tablestyler.com/  */
 .datagrid {
 	float: left;
 	margin-right: 10px;

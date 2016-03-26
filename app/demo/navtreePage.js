@@ -56,6 +56,8 @@ function NavtreePage() {
             gridOptions.topicSelected = subject.key;   // key is the only possible value here.
             datagrid = new Datagrid(data, gridOptions);
             datagrid.init();
+            console.log('gridOptions = ' + JSON.stringify(gridOptions));
+            console.log('gridResult = ' + JSON.stringify(datagrid.getGridResult()));
             table = datagrid.generateView(tableCaption);
 
             $("#datapageView #grids").append(table);

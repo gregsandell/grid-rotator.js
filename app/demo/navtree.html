@@ -1,103 +1,93 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-    <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="navtreePage.js"></script>
-    <script src="ufoSample.js"></script>
-    <script src="hairEyeSexSample.js"></script>
-    <script src="../datagrid.js"></script>
-    <link rel="stylesheet" href="demo.css">
-    <script>
-        var navtreePage = new NavtreePage(),
-                datasets;
+    <head>
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script src="navtreePage.js"></script>
+        <script src="ufoSample.js"></script>
+        <script src="hairEyeSexSample.js"></script>
+        <script src="../datagrid.js"></script>
+        <link rel="stylesheet" href="demo.css">
+        <script>
+            var navtreePage = new NavtreePage(),
+                    datasets;
 
-        datasets = {
-            ufoSample: {
-                data: ufoSample,
-                params: [
-                    {key: 'incident', label: "Incident"},
-                    {key: 'timeperiod', label: "Time Period"},
-                    {key: 'geog', label: "Geography"}
-                ],
-                desc: 'UFO Data for various Los Angeles Counties.  Completely invented pretend data.',
-                shortTitle: "Los Angeles County UFOs"
-            },
-            hairEyeSexSample: {
-                data: hairEyeSexSample,
-                params: [
-                    {key: 'sex', label: "Gender"},
-                    {key: 'hair', label: "Hair Color"},
-                    {key: 'eyes', label: "Eye Color"}
-                ],
-                desc: "Source:  Hair and Eye Color of Statistics Students from https://vincentarelbundock.github.io/Rdatasets/datasets.html",
-                shortTitle: "Hair & Eye color by gender"
-            }
-        };
-        navtreePage.init();
+            datasets = {
+                ufoSample: {
+                    data: ufoSample,
+                    params: [
+                        {key: 'incident', label: "Incident"},
+                        {key: 'timeperiod', label: "Time Period"},
+                        {key: 'geog', label: "Geography"}
+                    ],
+                    desc: 'UFO Data for various California Counties.  Completely invented pretend data.',
+                    shortTitle: "California County UFOs"
+                },
+                hairEyeSexSample: {
+                    data: hairEyeSexSample,
+                    params: [
+                        {key: 'sex', label: "Gender"},
+                        {key: 'hair', label: "Hair Color"},
+                        {key: 'eyes', label: "Eye Color"}
+                    ],
+                    desc: "Source:  Hair and Eye Color of Statistics Students from https://vincentarelbundock.github.io/Rdatasets/datasets.html",
+                    shortTitle: "Hair & Eye color by gender"
+                }
+            };
+            navtreePage.init();
 
-        $(document).ready(function () {
-            var key,
-                    sampleData;
+            $(document).ready(function () {
+                var key,
+                        sampleData;
 
-            $("a#flipxy").click(function () {
-                ++navtreePage.flipCount;
-                navtreePage.clearPage();
-                navtreePage.makeDatagrid(sampleData);
-            });
+                $("a#flipxy").click(function () {
+                    ++navtreePage.flipCount;
+                    navtreePage.clearPage();
+                    navtreePage.makeDatagrid(sampleData);
+                });
 
-            $("a#rotate").click(function () {
-                ++navtreePage.rotationCount;
-                navtreePage.clearPage();
-                $("#rotateLabel").html("Topic:<br>" + sampleData.params[navtreePage.rotationCount % 3].label);
-                navtreePage.makeDatagrid(sampleData);
-            });
+                $("a#rotate").click(function () {
+                    ++navtreePage.rotationCount;
+                    navtreePage.clearPage();
+                    $("#rotateLabel").html("Topic:<br>" + sampleData.params[navtreePage.rotationCount % 3].label);
+                    navtreePage.makeDatagrid(sampleData);
+                });
 
-            $('select#dataSelect').change(function () {
-//                    console.log('changed to ' + $(this).val());
-                navtreePage.clearPage();
-                sampleData = datasets[$(this).val()];
+                $('select#dataSelect').change(function () {
+    //                    console.log('changed to ' + $(this).val());
+                    navtreePage.clearPage();
+                    sampleData = datasets[$(this).val()];
+                    $("#rotateLabel").html("Topic:<br>" + sampleData.params[0].label);
+                    navtreePage.makeDatagrid(sampleData);
+                });
+
+                for (key in datasets) {
+                    if (datasets.hasOwnProperty(key)) {
+    //                        console.log('datasets["' + key + '"] = ' + JSON.stringify(datasets[key]));
+                        $('select#dataSelect').append($('<option />', {text: datasets[key].shortTitle, val: key}));
+                    }
+                }
+    //                console.log('selected: ' + $('select#dataSelect').val());
+                sampleData = datasets[$('select#dataSelect').val()];
                 $("#rotateLabel").html("Topic:<br>" + sampleData.params[0].label);
                 navtreePage.makeDatagrid(sampleData);
             });
 
-            for (key in datasets) {
-                if (datasets.hasOwnProperty(key)) {
-//                        console.log('datasets["' + key + '"] = ' + JSON.stringify(datasets[key]));
-                    $('select#dataSelect').append($('<option />', {text: datasets[key].shortTitle, val: key}));
-                }
-            }
-//                console.log('selected: ' + $('select#dataSelect').val());
-            sampleData = datasets[$('select#dataSelect').val()];
-            $("#rotateLabel").html("Topic:<br>" + sampleData.params[0].label);
-            navtreePage.makeDatagrid(sampleData);
-        });
-
-
-    </script>
-    <style>
-        a#rotate {
-            z-index: 0;
-        }
-
-        a#flipxy {
-            z-index: 1;
-        }
-    </style>
-</head>
-<body>
-<div id="datapageView" class="datapage regular">
-    <div class="pagecontrols clearfix">
-        <div id="gridOrientationControls leftside">
-            <label name="dataSelect">Dataset: </label>
-            <select id="dataSelect"></select>
-            <!-- TO DO:  wrong topic is showing, fix -->
-            <span id="rotateLabel" class="label"></span>
-            <a class="action rotate" id="rotate"></a>
-            <a class="action flip" id="flipxy"></a>
+        </script>
+    </head>
+    <body>
+        <div id="datapageView" class="datapage regular">
+            <div class="pagecontrols clearfix">
+                <div id="gridOrientationControls leftside">
+                    <label name="dataSelect">Dataset: </label>
+                    <select id="dataSelect"></select>
+                    <!-- TO DO:  wrong topic is showing, fix -->
+                    <span id="rotateLabel" class="label"></span>
+                    <a class="action rotate" id="rotate"></a>
+                    <a class="action flip" id="flipxy"></a>
+                </div>
+            </div>
+            <div id="grids"></div>
         </div>
-    </div>
-    <div id="grids"></div>
-</div>
-</body>
+    </body>
 </html>

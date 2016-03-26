@@ -163,6 +163,10 @@ function Datagrid(inputData, options) {
         return result;
     };
 
+    this.getGridResult = function() {
+        return gridResult;
+    };
+
     this.generateView = function(caption) {
         //console.log('in generate view, gridResult is ' + JSON.stringify(gridResult));
         var empties = findEmpties();
