@@ -1,4 +1,4 @@
-function NavtreePage() {
+function GridRotatorCtrl() {
 
     /* There are three rotation states.  Each time the user clicks on rotate, this gets incremented by one, and a modulo
      * operator figures out which of the three states it indicates.
