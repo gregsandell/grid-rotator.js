@@ -11,7 +11,6 @@ function Datagrid(inputData, options) {
 
     this.setOptions(options);
 
-    //console.log('datagrid constructor, options = ', options);
     /*
      * Arguments
      * inputData:
@@ -24,8 +23,7 @@ function Datagrid(inputData, options) {
     this.init = function() {
 
         gridResult = generateGrid();
-        //console.log('gridResult is now: ' + JSON.stringify(gridResult));
-        //return gridResult;
+
     };
     /*
      * It's easier to iterate through an array than a hashmap.  This returns an "array version" of a hashmap.
@@ -81,16 +79,8 @@ function Datagrid(inputData, options) {
         }
 
         /* Make arrays of unique x and y values */
-        //{
-        //    geog_id: 'Bar geog id',
-        //        dat_id: '32767',
-        //    time_period: '2007'
-        //}
         $.each(gridSource.data.rows, function(i, row) {
-            //console.log('row is ' + JSON.stringify(row));
-            //console.log('is there an ' + gridOptions.xParam + ' field in above?');
             if ($.inArray(row[gridOptions.xParam], xValues) == -1) {
-                //console.log('pushing row["' + gridOptions.xParam + '"] (' + row[gridOptions.xParam] + ') onto xValues');
                 xValues.push(row[gridOptions.xParam]);
             }
             if ($.inArray(row[gridOptions.yParam], yValues) == -1) {
@@ -98,26 +88,13 @@ function Datagrid(inputData, options) {
             }
         });
 
-        //console.log('xParam = ' + gridOptions.xParam + ', yParam = ' + gridOptions.yParam);
-        //console.log('xValues are ' + JSON.stringify(xValues));
-        //console.log('yValues are ' + JSON.stringify(yValues));
-
-        //console.log('gridSource.data.rows is now ' + JSON.stringify(gridSource.data.rows));
-
         /* Prepare the data for the x-axis of the grid */
-        //console.log('gridOptions.xParam is ' + gridOptions.xParam);
-        //console.log('loop going to iterate on xValues = ' + JSON.stringify(xValues));
-        //console.log(gridOptions.xParam + ' map is' +  JSON.stringify(gridSource.maps[gridOptions.xParam]));
         $.each(xValues, function(i, xValue) {
             var long = gridSource.maps[gridOptions.xParam][xValue].long;
             var short = gridSource.maps[gridOptions.xParam][xValue].short;
 
-            /* Careful, the 'long' field sometimes comes back  */
-            //result.x.push((short && short != "") ? short : long);
             result.x.push((long && long != "") ? long : short);
         });
-
-        //console.log('result.x is now: ' + JSON.stringify(result.x));
 
         /* Prepare the data for the y-axis of the grid */
         $.each(yValues, function(i, yValue) {

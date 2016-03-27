@@ -53,7 +53,10 @@ For example, here is the first <i>row</i> object of the hair/eye/gender dataset:
 The three fieldnames of hair, eyes and sex, and the three values of black, brown and male are all variable names that refer to fully-spelled out values in the <i>map</i> portion of the input dataset.  Here is an abbreviated view of the <i>map</i> field of the hair/eye/gender dataset:
 
     maps: {
-        titles: {hair: "Hair Color", eyes: "Eye Color", sex: "Gender"},
+         "topics": [
+            {"key": "hair", "title": "Hair Color"},
+            ... same for eyes & sex ...
+        ],
         hair: {
             black: { short: "Black", long: "Black Hair" },
             ... same for brown, red & blonde ...

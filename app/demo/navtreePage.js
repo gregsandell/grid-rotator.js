@@ -11,38 +11,28 @@ function NavtreePage() {
     this.flipCount = 0;
 
     /*  Start with no flip, no rotation */
-    this.init = function() {   // public
-        //console.log('called init');
+    this.init = function() {
         this.rotationCount = 0;
         this.flipCount = 0;
     };
 
-    //this.makeDatagrid = function(responseData, params) {    // public
-    this.makeDatagrid = function(dataset) {    // public
+    this.makeDatagrid = function(data) {
         var chartSubjectArray,
-            data = dataset.data,
-            params = dataset.params,
-            gridOptions = {"topicParam": params[0].key, "xParam": params[1].key, "yParam": params[2].key, "suppressNAs": true},
-            datagrid = new Datagrid(data, gridOptions),  // needed to make mapToArray calls
+            topics = data.maps.topics,
+            gridOptions,
+            datagrid,
             xParam,
             yParam;
 
         if (this.rotationCount % 3 == 0) {
-            gridOptions = {"topicParam": params[0].key, "xParam": params[1].key, "yParam": params[2].key, "suppressNAs": true};
-            chartSubjectArray = datagrid.mapToArray(params[0].key, 'long');
-            //console.log('rotation 0');
+            gridOptions = { "topicParam": topics[0].key, "xParam": topics[1].key, "yParam": topics[2].key, "suppressNAs": true};
         } else if (this.rotationCount % 3 == 1) {
-            gridOptions = {"topicParam": params[2].key, "xParam": params[0].key, "yParam": params[1].key, "suppressNAs": true};
-            chartSubjectArray = datagrid.mapToArray(params[2].key, 'long');
-            //console.log('rotation 1');
+            gridOptions = {"topicParam": topics[1].key, "xParam": topics[0].key, "yParam": topics[2].key, "suppressNAs": true};
         } else if (this.rotationCount % 3 == 2) {
-            gridOptions = {"topicParam": params[1].key, "xParam": params[2].key, "yParam": params[0].key, "suppressNAs": true};
-            chartSubjectArray = datagrid.mapToArray(params[1].key, 'long');
-            //console.log('rotation 2');
+            gridOptions = {"topicParam": topics[2].key, "xParam": topics[0].key, "yParam": topics[1].key, "suppressNAs": true};
         }
-        //console.log('topicParam = ' + gridOptions.topicParam);
-        $("#rotateLabel").html("Topic:<br>" + data.maps.titles[gridOptions.topicParam]);
-        //console.log('chartSubjectArray is ' + JSON.stringify(chartSubjectArray));
+
+        $("#rotateLabel").html("Topic:<br>" + data.maps.topics[this.rotationCount % 3].title);
         if (this.flipCount % 2 == 1) {
             /* Swap 'em */
             xParam = gridOptions.xParam;
@@ -53,16 +43,13 @@ function NavtreePage() {
         this.clearPage();
 
         /* For each topic, output a grid. */
-        $.each(chartSubjectArray, function(i, subject) {
+        $.each(data.maps[gridOptions.topicParam], function(topicSelected, record) {
             var table,
-                tableCaption = (subject.long && subject.long != "") ? subject.long : subject.short;
+                tableCaption = record.long;
 
-            /* Each grid shares the same options, except for its title */
-            gridOptions.topicSelected = subject.key;   // key is the only possible value here.
+            gridOptions.topicSelected = topicSelected;
             datagrid = new Datagrid(data, gridOptions);
             datagrid.init();
-            //console.log('gridOptions = ' + JSON.stringify(gridOptions));
-            //console.log('gridResult = ' + JSON.stringify(datagrid.getGridResult()));
             table = datagrid.generateView(tableCaption);
 
             $("#datapageView #grids").append(table);

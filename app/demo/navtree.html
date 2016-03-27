@@ -13,36 +13,20 @@
         var navtreePage = new NavtreePage(),
                 datasets;
 
-        // TO DO: remove the params data, it's available in data.maps.titles
         datasets = {
             ufoSample: {
                 data: ufoSample,
-                params: [
-                    {key: 'incident', label: "Incident"},
-                    {key: 'timeperiod', label: "Time Period"},
-                    {key: 'geog', label: "Geography"}
-                ],
                 source: 'Completely invented, pretend data.',
                 title: "UFO Data for various California Counties"
             },
             hairEyeSexSample: {
                 data: hairEyeSexSample,
-                params: [
-                    {key: 'sex', label: "Gender"},
-                    {key: 'hair', label: "Hair Color"},
-                    {key: 'eyes', label: "Eye Color"}
-                ],
                 source: "https://vincentarelbundock.github.io/Rdatasets/datasets.html",
                 title: "Hair & Eye color by gender"
             },
             UCBAdmissionsSample: {
                 data: UCBAdmissionsSample,
-                params: [
-                    {key: 'admit', label: "Admission Status"},
-                    {key: 'gender', label: "Gender"},
-                    {key: 'department', label: "Department"}
-                ],
-                source: "https://vincentarelbundock.github.io/Rdatasets/datasets.html",
+               source: "https://vincentarelbundock.github.io/Rdatasets/datasets.html",
                 title: "Student Admissions at UC Berkeley"
             }
         };
@@ -55,36 +39,31 @@
             $("a#flipxy").click(function () {
                 ++navtreePage.flipCount;
                 navtreePage.clearPage();
-                navtreePage.makeDatagrid(sampleData);
+                navtreePage.makeDatagrid(sampleData.data);
             });
 
             $("a#rotate").click(function () {
                 ++navtreePage.rotationCount;
                 navtreePage.clearPage();
-                $("#rotateLabel").html("Topic:<br>" + sampleData.params[navtreePage.rotationCount % 3].label);
-                navtreePage.makeDatagrid(sampleData);
+                $("#rotateLabel").html("Topic:<br>" + sampleData.data.maps.topics[navtreePage.rotationCount % 3].title);
+                navtreePage.makeDatagrid(sampleData.data);
             });
 
             $('select#dataSelect').change(function () {
-                //                    console.log('changed to ' + $(this).val());
                 navtreePage.clearPage();
                 sampleData = datasets[$(this).val()];
-                $("#rotateLabel").html("Topic:<br>" + sampleData.params[0].label);
-                navtreePage.makeDatagrid(sampleData);
+                $("#rotateLabel").html("Topic:<br>" + sampleData.data.maps.topics[0].label);
+                navtreePage.makeDatagrid(sampleData.data);
                 $(".source").html("Source: " + sampleData.source);
             });
 
             function init() {
-                for (key in datasets) {
-                    if (datasets.hasOwnProperty(key)) {
-                        //                        console.log('datasets["' + key + '"] = ' + JSON.stringify(datasets[key]));
-                        $('select#dataSelect').append($('<option />', {text: datasets[key].title, val: key}));
-                    }
-                }
-                //                console.log('selected: ' + $('select#dataSelect').val());
+                $.each(datasets, function(key, record) {
+                    $('select#dataSelect').append($('<option />', {text: record.title, val: key}));
+                })
                 sampleData = datasets[$('select#dataSelect').val()];
                 $(".source").html("Source: " + sampleData.source);
-                navtreePage.makeDatagrid(sampleData);
+                navtreePage.makeDatagrid(sampleData.data);
             }
 
             init();

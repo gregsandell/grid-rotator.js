@@ -196,11 +196,11 @@ var hairEyeSexSample = {
         ]
     },
     "maps": {
-        "titles": {
-            "hair": "Hair Color",
-            "eyes": "Eye Color",
-            "sex": "Gender"
-        },
+        "topics": [
+            {"key": "hair", "title": "Hair Color"},
+            {"key": "eyes", "title": "Eye Color"},
+            {"key": "sex", "title": "Gender"}
+        ],
         "hair": {
             "black": {
                 "short": "Black",

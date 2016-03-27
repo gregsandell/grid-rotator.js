@@ -148,11 +148,11 @@ var UCBAdmissionsSample = {
         ]
     },
     "maps": {
-        "titles": {
-            "admit": "Admission Status",
-            "gender": "Gender",
-            "department": "College Department"
-        },
+        "topics": [
+            {"key": "admit", "title": "Admission Status"},
+            {"key": "gender", "title": "Gender"},
+            {"key": "department", "title": "College Department"}
+        ],
         "admit": {
             "admitted": {
                 "short": "Admitted",
