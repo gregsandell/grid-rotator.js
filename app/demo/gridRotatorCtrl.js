@@ -24,6 +24,8 @@ function GridRotatorCtrl() {
             xParam,
             yParam;
 
+        datagrid = new Datagrid({}, {});
+
         if (this.rotationCount % 3 == 0) {
             gridOptions = { "topicParam": topics[0].key, "xParam": topics[1].key, "yParam": topics[2].key, "suppressNAs": true};
         } else if (this.rotationCount % 3 == 1) {

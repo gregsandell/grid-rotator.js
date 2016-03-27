@@ -3,18 +3,19 @@
     <head>
         <title></title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-        <script src="gridRotatorCtrl.js"></script>
-        <script src="datasets/ufoSample.js"></script>
-        <script src="datasets/hairEyeSexSample.js"></script>
-        <script src="datasets/UCBAdmissions.js"></script>
         <!-- When developing, user this: -->
         <script src="../grid-rotator-1.0.0.js"></script>
         <!-- when hosted on gregsandell.com, use this: -->
         <!--<script src="localCopy/grid-rotator-1.0.0.js"></script>-->
+        <script src="gridRotatorCtrl.js"></script>
+        <script src="datasets/ufoSample.js"></script>
+        <script src="datasets/hairEyeSexSample.js"></script>
+        <script src="datasets/UCBAdmissions.js"></script>
         <link rel="stylesheet" href="demo.css">
         <script>
             var gridRotatorCtrl = new GridRotatorCtrl(),
-                    datasets;
+                    datasets,
+                    datagrid;
 
             datasets = {
                 ufoSample: {
@@ -56,6 +57,10 @@
                     gridRotatorCtrl.clearPage();
                     sampleData = datasets[$(this).val()];
                     $("#rotateLabel").html("Topic:<br>" + sampleData.data.maps.topics[0].label);
+
+                    // TODO:  is there a way to call verifyInputData like a static function?
+                    datagrid = new Datagrid({}, {});
+                    datagrid.verifyInputData(sampleData.data);
                     gridRotatorCtrl.makeDatagrid(sampleData.data);
                     $(".source").html("Source: " + sampleData.source);
                 });
@@ -66,6 +71,8 @@
                     });
                     sampleData = datasets[$('select#dataSelect').val()];
                     $(".source").html("Source: " + sampleData.source);
+                    datagrid = new Datagrid({}, {});
+                    datagrid.verifyInputData(sampleData.data);
                     gridRotatorCtrl.makeDatagrid(sampleData.data);
                 }
 
