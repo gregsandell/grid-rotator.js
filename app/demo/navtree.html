@@ -60,7 +60,7 @@
             function init() {
                 $.each(datasets, function(key, record) {
                     $('select#dataSelect').append($('<option />', {text: record.title, val: key}));
-                })
+                });
                 sampleData = datasets[$('select#dataSelect').val()];
                 $(".source").html("Source: " + sampleData.source);
                 navtreePage.makeDatagrid(sampleData.data);
