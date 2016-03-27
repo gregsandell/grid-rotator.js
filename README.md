@@ -1,6 +1,10 @@
-#data-rotator
+#grid-rotator.js
 
-Library for flipping and rotating sets of related data
+jQuery-based API for flipping and rotating sets of related data
+
+##TL;DR
+<br>
+<span style="font-size: 16px; font-weight: bold">Bring me straight to [the demo](http://gregsandell.com/misc/grid-rotator)!</span>
 
 ##Purpose
 This API allows one to take sets of related x-y data and either flip the axes (x becomes y, and vice versa), or rotate the entire collection.  It applies to datasets where there are three dimensions for every observation.  
@@ -11,7 +15,7 @@ For example, consider this small dataset surveying hair color, eye color and gen
 
 We have four tables (or grids) on the topic of eye color, one each for blue, brown, green, and hazel.  Each grid shows, for the given eye color, a breakdown of hair color to black, brown, red and blonde.  And finally, for each hair color, we have an observation for each gender.  For example for blue-eyed, black-haired individuals, 11 were found who were male, and 9 who were female.
 
-An important feature here is that this multivariate data is complete:  every combination of dimensions has an observation.  (The API can also deal with missing values, but that is discussed later.)
+An important feature here is that this multivariate data is <i>complete</i>:  every combination of dimensions has an observation.  (The API can also deal with missing values, but that is discussed later.)
 
 The simplest kind of rotation offered by the API is where the axes simply swap:
 ![](docImages/axisSwap.png?raw=true "Dataset with swapped axes")
@@ -113,5 +117,6 @@ To make a rotation of the above, you could take the previous <i>gridParams</i>:
 ...and swap out one of the x- or yParams to become the new topic, such as:
 
     {topicParam: "hair", xParam: "eyes", yParam: "sex", suppressNAs: true, topicSelected: "black"}
-   
+##Dependencies
+* jQuery (currently works with version 2.2.0)
 
