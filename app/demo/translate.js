@@ -6,43 +6,17 @@ var outputJSON = {
         rows: []
     },
     maps: {
-        hair: {
-            black: {
-                short: 'Black',
-                long: 'Black Hair'
+        admit: {
+            admitted: {
+                short: 'Admitted',
+                long: 'Admitted'
             },
-            brown: {
-                short: 'Brown',
-                long: 'Brown Hair'
-            },
-            red: {
-                short: 'Red',
-                long: 'Red Hair'
-            },
-            blonde: {
-                short: 'Blonde',
-                long: 'Blonde Hair'
+            rejected: {
+                short: 'Rejected',
+                long: 'Rejected'
             }
         },
-        eyes: {
-            brown: {
-                short: 'Brown',
-                long: 'Brown Eyes'
-            },
-            blue: {
-                short: 'Blue',
-                long: 'Blue Eyes'
-            },
-            hazel: {
-                short: 'Hazel',
-                long: 'Hazel Eyes'
-            },
-            green: {
-                short: 'Green',
-                long: 'Green Eyes'
-            },
-        },
-        sex: {
+        gender: {
             male: {
                 long: 'Male',
                 short: 'Male'
@@ -51,10 +25,36 @@ var outputJSON = {
                 long: 'Female',
                 short: 'Female'
             }
+        },
+        department: {
+            A: {
+                long: "Department A",
+                short: "A"
+            },
+            B: {
+                long: "Department B",
+                short: "B"
+            },
+            C: {
+                long: "Department C",
+                short: "C"
+            },
+            D: {
+                long: "Department D",
+                short: "D"
+            },
+            E: {
+                long: "Department E",
+                short: "E"
+            },
+            F: {
+                long: "Department F",
+                short: "F"
+            },
         }
     }
 };
-fs.readFile('HairEyeColor.csv', 'utf8', function (err, data) {
+fs.readFile('UCBAdmissions.csv', 'utf8', function (err, data) {
     parse(data, function (err, json) {
         //console.log(JSON.stringify(json));
         json.map(function(record, idx) {
@@ -65,16 +65,16 @@ fs.readFile('HairEyeColor.csv', 'utf8', function (err, data) {
                 return item.toLowerCase();
             });
             var newRecord = {
-                hair: caseAltered[1],
-                eyes: caseAltered[2],
-                sex: caseAltered[3],
+                admit: caseAltered[1],
+                gender: caseAltered[2],
+                department: caseAltered[3],
                 value: caseAltered[4]
             };
             outputJSON.data.rows.push(newRecord);
         });
         //console.log(outputJSON);
-        var jString = 'var sampleData = ' + JSON.stringify(outputJSON, null, 4) + ';';
-        fs2.writeFile("hairEyeSexSample.js", jString, function(err) {
+        var jString = 'var UCBAdmissionsSample = ' + JSON.stringify(outputJSON, null, 4) + ';';
+        fs2.writeFile("UCBAdmissions.js", jString, function(err) {
             if(err) {
                 return console.log('Error writing file: ' + err);
             }

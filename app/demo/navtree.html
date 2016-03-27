@@ -6,12 +6,14 @@
     <script src="navtreePage.js"></script>
     <script src="ufoSample.js"></script>
     <script src="hairEyeSexSample.js"></script>
+    <script src="UCBAdmissions.js"></script>
     <script src="../datagrid.js"></script>
     <link rel="stylesheet" href="demo.css">
     <script>
         var navtreePage = new NavtreePage(),
                 datasets;
 
+        // TO DO: remove the params data, it's available in data.maps.titles
         datasets = {
             ufoSample: {
                 data: ufoSample,
@@ -32,6 +34,16 @@
                 ],
                 source: "https://vincentarelbundock.github.io/Rdatasets/datasets.html",
                 title: "Hair & Eye color by gender"
+            },
+            UCBAdmissionsSample: {
+                data: UCBAdmissionsSample,
+                params: [
+                    {key: 'admit', label: "Admission Status"},
+                    {key: 'gender', label: "Gender"},
+                    {key: 'department', label: "Department"}
+                ],
+                source: "https://vincentarelbundock.github.io/Rdatasets/datasets.html",
+                title: "Student Admissions at UC Berkeley"
             }
         };
         navtreePage.init();
