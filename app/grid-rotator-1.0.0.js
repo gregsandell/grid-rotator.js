@@ -1,4 +1,4 @@
-function Datagrid(inputData, options) {
+function GridRotator(inputData, options) {
     var gridSource = inputData,
         gridOptions,
         gridResult = {},
@@ -18,7 +18,6 @@ function Datagrid(inputData, options) {
      *     topicParam:  the title to appear on the chart
      *     xParam: name of the field in inputData to treat as x values
      *     yParam: name of the field in inputData to treat as y values
-     *     suppressNAs:  if true, eliminate any row and any column consisting only of "n/a" values
      */
     this.init = function() {
 
@@ -132,7 +131,7 @@ function Datagrid(inputData, options) {
                         return false;
                     }
                 });
-                if (!v) {
+                if (v === "") {
                     values.push('n/a');
                 }
             });
@@ -148,10 +147,6 @@ function Datagrid(inputData, options) {
     };
 
     this.generateView = function(caption) {
-        //console.log('in generate view, gridResult is ' + JSON.stringify(gridResult));
-        var empties = findEmpties();
-        //console.log(empties.x.length + ' x empties were found, ' + empties.y.length + ' y empties were found.');
-        var suppressNAs = gridOptions.suppressNAs != undefined && gridOptions.suppressNAs;
         var dataview = $("<div class='datagrid'>");
         var table = $("<table>");
         var caption = $('<caption>').text(caption);
@@ -160,21 +155,16 @@ function Datagrid(inputData, options) {
         var tr = $("<tr>");
         tr.append($("<th>").text(""));
         $.each(gridResult.x, function(i, columnLabel) {
-            if (suppressNAs && empties.x[i]) return true;
             tr.append($("<th>").text(columnLabel));
             thead.append(tr);
         });
         table.append(thead);
         var tbody = $("<tbody>");
-        /* This is a hack to keep users from seeing rows of all n/a's.  It only works in non-flipped view.
-         * You'll see the n/a's in columns if you flip */
         $.each(gridResult.rows, function(idx, row) {
-            if (suppressNAs && empties.y[idx]) return true;
             var className = (idx % 2) == 1 ? 'alt' : '';
             tr = $("<tr class='" + className + "''>");
             tr.append($("<td>").text(row.y));
             $.each(row.v, function(jdx, value) {
-                if (suppressNAs && empties.x[jdx]) return true;
                 tr.append($("<td>").text(value));
             });
             tbody.append(tr);
@@ -182,28 +172,6 @@ function Datagrid(inputData, options) {
         table.append(tbody);
         dataview.append(table);
         return dataview;
-    };
-
-    function findEmpties() {
-        var result = {x: [], y: []};
-
-        $.each(gridResult.x, function(i, x) {
-            result.x[i] = true;
-        });
-        $.each(gridResult.rows, function(i, y) {
-            result.y[i] = true;
-        });
-        $.each(gridResult.rows, function(i, record) {
-            $.each(record.v, function(j, v) {
-                result.y[i] = result.y[i] && (v == "n/a");
-            });
-        });
-        $.each(result.x, function(i, x) {
-            $.each(gridResult.rows, function(j, record) {
-                result.x[i] = result.x[i] && (record.v[i] == "n/a");
-            });
-        });
-        return result;
     };
 
     this.verifyInputData = function(_data) {
@@ -246,22 +214,25 @@ function Datagrid(inputData, options) {
 
     };
 
-    function validateOptions() {
+    this.validateOptions = function(_options) {
         var requiredOptions = {"xParam": false, "yParam": false, "topicParam": false},
             missing,
             opt;
 
         for (opt in requiredOptions) {
-            requiredOptions[opt] = opt in gridOptions;
+            requiredOptions[opt] = opt in _options;
         }
         missing = $.map(Object.keys(requiredOptions), function(opt) {
             return !requiredOptions[opt] ? ("'" + opt + "'") : null;
         });
         if (missing.length > 0) {
+            // This join() will result in an "and" before final item.  (e.g. "a, b and c")
             var optList = [missing.slice(0, -1).join(', '), missing.slice(-1)[0]].join(missing.length < 2 ? '' : ' and ');
-            var s = APPNAME + ' error:  Required fields ' + optList + ' are missing from the options object, so Datagrid will fail.';
+            var plural = (missing.length > 1) ? "s " : " ";
+            var verb = (missing.length > 1) ? " are " : " is ";
+            var s = APPNAME + ' error:  Required field' + plural + optList + verb + 'missing from the options object, so ' + APPNAME + ' will fail.';
             console.error(s);
         }
-    }
+    };
 
 };

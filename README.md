@@ -98,7 +98,7 @@ This produces a representation of a single table suitable for using as input for
     
 The particular presentation of x/y axes and rotation is determined by the parameters.  The value of <i>gridParams</i> the result above is:
 
-    {topicParam: "eyes", xParam: "sex", yParam: "hair", suppressNAs: true, topicSelected: "blue"}
+    {topicParam: "eyes", xParam: "sex", yParam: "hair", topicSelected: "blue"}
     
 To swap the x and y axes, you would simply swap the values for xParam and yParam in the gridParams, and make the same three calls we made above.  This would produce a <i>gridResult</i> of:
 
@@ -112,11 +112,15 @@ To swap the x and y axes, you would simply swap the values for xParam and yParam
 
 To make a rotation of the above, you could take the previous <i>gridParams</i>:
 
-    {topicParam: "eyes", xParam: "hair", yParam: "sex", suppressNAs: true, topicSelected: "blue"}
+    {topicParam: "eyes", xParam: "hair", yParam: "sex", topicSelected: "blue"}
     
 ...and swap out one of the x- or yParams to become the new topic, such as:
 
-    {topicParam: "hair", xParam: "eyes", yParam: "sex", suppressNAs: true, topicSelected: "black"}
+    {topicParam: "hair", xParam: "eyes", yParam: "sex", topicSelected: "black"}
+##Missing Values
+If the input dataset is not <i>complete</i> (i.e. there are any missing values for fulling crossing topicParam, xParam and yParam) 
+the observation is represented in the data with the string "n/a" (for 'not available').
+
 ##Dependencies
 * jQuery (currently works with version 2.2.0)
 

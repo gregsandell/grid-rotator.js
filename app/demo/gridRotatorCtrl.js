@@ -20,19 +20,21 @@ function GridRotatorCtrl() {
         var chartSubjectArray,
             topics = data.maps.topics,
             gridOptions,
-            datagrid,
+            gridRotator,
             xParam,
             yParam;
 
-        datagrid = new Datagrid({}, {});
+        gridRotator = new GridRotator({}, {});
 
         if (this.rotationCount % 3 == 0) {
-            gridOptions = { "topicParam": topics[0].key, "xParam": topics[1].key, "yParam": topics[2].key, "suppressNAs": true};
+            gridOptions = { "topicParam": topics[0].key, "xParam": topics[1].key, "yParam": topics[2].key};
         } else if (this.rotationCount % 3 == 1) {
-            gridOptions = {"topicParam": topics[1].key, "xParam": topics[0].key, "yParam": topics[2].key, "suppressNAs": true};
+            gridOptions = {"topicParam": topics[1].key, "xParam": topics[0].key, "yParam": topics[2].key};
         } else if (this.rotationCount % 3 == 2) {
-            gridOptions = {"topicParam": topics[2].key, "xParam": topics[0].key, "yParam": topics[1].key, "suppressNAs": true};
+            gridOptions = {"topicParam": topics[2].key, "xParam": topics[0].key, "yParam": topics[1].key};
         }
+
+        gridRotator.validateOptions(gridOptions);
 
         $("#rotateLabel").html("Topic:<br>" + data.maps.topics[this.rotationCount % 3].title);
         if (this.flipCount % 2 == 1) {
@@ -50,9 +52,9 @@ function GridRotatorCtrl() {
                 tableCaption = record.long;
 
             gridOptions.topicSelected = topicSelected;
-            datagrid = new Datagrid(data, gridOptions);
-            datagrid.init();
-            table = datagrid.generateView(tableCaption);
+            gridRotator = new GridRotator(data, gridOptions);
+            gridRotator.init();
+            table = gridRotator.generateView(tableCaption);
 
             $("#datapageView #grids").append(table);
         });

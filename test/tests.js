@@ -2,7 +2,8 @@ var assert = chai.assert,
     expect = chai.expect,
     should = chai.should();
 
-describe("Datagrid tests", function() {
+// TODO:  lots of variable name changes will break current tests
+describe("GridRotator tests", function() {
     var suite;
 
     beforeEach(function () {
@@ -13,13 +14,13 @@ describe("Datagrid tests", function() {
     afterEach(function() {
         suite.sandbox.restore();
         suite = null;
-        datagrid = null;
+        gridRotator = null;
     });
 
     it("Fails as expected with no data", function () {
-        suite.datagrid = new Datagrid({}, {});
+        suite.gridRotator = new GridRotator({}, {});
         try {
-            suite.datagrid.init();
+            suite.gridRotator.init();
             assert.isNotOk(true, 'Expected error not thrown');
         } catch (e) {
             assert.isOk(true, 'Caught expected error');
@@ -32,9 +33,9 @@ describe("Datagrid tests", function() {
             },
             maps: {}
         };
-        suite.datagrid = new Datagrid(gridSource, {});
-        suite.datagrid.init();
-        var $generatedHtml = suite.datagrid.generateView('No Caption');
+        suite.gridRotator = new GridRotator(gridSource, {});
+        suite.gridRotator.init();
+        var $generatedHtml = suite.gridRotator.generateView('No Caption');
         assert.equal($generatedHtml.find('table').length, 1);
         assert.equal($generatedHtml.find('table tr').length, 1);
         assert.equal($generatedHtml.find('table tr th').html(), '');
@@ -51,7 +52,7 @@ describe("Datagrid tests", function() {
                 maps: {}
             };
             var badOptions = {xParam: 'foo', yParam: 'bar', topicParam: 'wow'};
-            suite.datagrid = new Datagrid(gridSource, badOptions);
+            suite.gridRotator = new GridRotator(gridSource, badOptions);
             expect(console.error).not.to.have.been.called;
         });
         it("Complains about bad options", function () {
@@ -63,7 +64,7 @@ describe("Datagrid tests", function() {
                 maps: {}
             };
             var badOptions = {};
-            suite.datagrid = new Datagrid(gridSource, badOptions);
+            suite.gridRotator = new GridRotator(gridSource, badOptions);
             expect(console.error).to.have.been.called;
         });
 
@@ -75,7 +76,7 @@ describe("Datagrid tests", function() {
         var yearLongName = 'The Year of 1996';
         var yearShortName = '1996';
         var datafieldLongName = 'City Revenue';
-        var gridOptions = { "yParam": "datafield", "xParam": "timeperiod", "topicParam": "geog", "topicSelected": chosenCityKey, "suppressNAs": true};
+        var gridOptions = { "yParam": "datafield", "xParam": "timeperiod", "topicParam": "geog", "topicSelected": chosenCityKey};
         var sampleData = {
             "data": {
                 "rows": [
@@ -108,13 +109,13 @@ describe("Datagrid tests", function() {
                 }
             }
         };
-        suite.datagrid = new Datagrid(sampleData, gridOptions);
-        suite.datagrid.init();
+        suite.gridRotator = new GridRotator(sampleData, gridOptions);
+        suite.gridRotator.init();
 
-        var $generatedHtml = suite.datagrid.generateView(sampleData.maps.geog[gridOptions.topicSelected].long);
-        assert.deepEqual(suite.datagrid.mapToArray(gridOptions.xParam, 'long'), [{"long": yearLongName,"key": "1996Key1","short": yearShortName}]);
-        assert.deepEqual(suite.datagrid.mapToArray(gridOptions.yParam, 'long'), [{long: 'City Revenue', short: 'Revenue', key: 'city_revenue'}]);
-        assert.deepEqual(suite.datagrid.mapToArray(gridOptions.topicParam, 'long'), [
+        var $generatedHtml = suite.gridRotator.generateView(sampleData.maps.geog[gridOptions.topicSelected].long);
+        assert.deepEqual(suite.gridRotator.mapToArray(gridOptions.xParam, 'long'), [{"long": yearLongName,"key": "1996Key1","short": yearShortName}]);
+        assert.deepEqual(suite.gridRotator.mapToArray(gridOptions.yParam, 'long'), [{long: 'City Revenue', short: 'Revenue', key: 'city_revenue'}]);
+        assert.deepEqual(suite.gridRotator.mapToArray(gridOptions.topicParam, 'long'), [
             {
                 "key": "cityKey2",
                 "long": "The City of Brisbane",

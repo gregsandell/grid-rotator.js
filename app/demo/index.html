@@ -15,7 +15,7 @@
         <script>
             var gridRotatorCtrl = new GridRotatorCtrl(),
                     datasets,
-                    datagrid;
+                    gridRotator;
 
             datasets = {
                 ufoSample: {
@@ -59,8 +59,8 @@
                     $("#rotateLabel").html("Topic:<br>" + sampleData.data.maps.topics[0].label);
 
                     // TODO:  is there a way to call verifyInputData like a static function?
-                    datagrid = new Datagrid({}, {});
-                    datagrid.verifyInputData(sampleData.data);
+                    gridRotator = new GridRotator({}, {});
+                    gridRotator.verifyInputData(sampleData.data);
                     gridRotatorCtrl.makeDatagrid(sampleData.data);
                     $(".source").html("Source: " + sampleData.source);
                 });
@@ -71,8 +71,8 @@
                     });
                     sampleData = datasets[$('select#dataSelect').val()];
                     $(".source").html("Source: " + sampleData.source);
-                    datagrid = new Datagrid({}, {});
-                    datagrid.verifyInputData(sampleData.data);
+                    gridRotator = new GridRotator({}, {});
+                    gridRotator.verifyInputData(sampleData.data);
                     gridRotatorCtrl.makeDatagrid(sampleData.data);
                 }
 
