@@ -1,5 +1,5 @@
 {
-  "name": "data-grid",
+  "name": "grid-rotator.js",
   "version": "1.0.0",
   "description": "Javascript library for rotating families of grids",
   "main": "Gruntfile.js",
@@ -16,12 +16,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gregsandell/data-grid.git"
+    "url": "git+https://github.com/gregsandell/grid-rotator.js"
   },
   "author": "Greg Sandell",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gregsandell/data-grid/issues"
+      "url": "https://github.com/gregsandell/grid-rotator.js/issues"
   },
-  "homepage": "https://github.com/gregsandell/data-grid#readme"
+  "homepage": "https://github.com/gregsandell/grid-rotator.js#readme"
 }

@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   //Initializing the configuration object
   grunt.initConfig({
     watch: {
-      files: ["**/*.js", "mocha.html"],
+      files: ["**/*.js", "mocha_tests.html"],
       options: {
         livereload: true
       }

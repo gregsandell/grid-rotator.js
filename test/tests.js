@@ -4,7 +4,8 @@ var assert = chai.assert,
 
 // TODO:  lots of variable name changes will break current tests
 describe("GridRotator tests", function() {
-    var suite;
+    var suite,
+        gridRotator;
 
     beforeEach(function () {
         suite = {};
@@ -36,9 +37,11 @@ describe("GridRotator tests", function() {
         suite.gridRotator = new GridRotator(gridSource, {});
         suite.gridRotator.init();
         var $generatedHtml = suite.gridRotator.generateView('No Caption');
+        console.log($generatedHtml.html());
         assert.equal($generatedHtml.find('table').length, 1);
-        assert.equal($generatedHtml.find('table tr').length, 1);
-        assert.equal($generatedHtml.find('table tr th').html(), '');
+        assert.equal($generatedHtml.find('table caption').html(), 'No Caption');
+        assert.equal($generatedHtml.find('table thead').length, '1');
+        assert.equal($generatedHtml.find('table tbody').length, '1');
     });
     describe('Tests for acceptable options', function() {
         beforeEach(function() {
@@ -113,30 +116,13 @@ describe("GridRotator tests", function() {
         suite.gridRotator.init();
 
         var $generatedHtml = suite.gridRotator.generateView(sampleData.maps.geog[gridOptions.topicSelected].long);
-        assert.deepEqual(suite.gridRotator.mapToArray(gridOptions.xParam, 'long'), [{"long": yearLongName,"key": "1996Key1","short": yearShortName}]);
-        assert.deepEqual(suite.gridRotator.mapToArray(gridOptions.yParam, 'long'), [{long: 'City Revenue', short: 'Revenue', key: 'city_revenue'}]);
-        assert.deepEqual(suite.gridRotator.mapToArray(gridOptions.topicParam, 'long'), [
-            {
-                "key": "cityKey2",
-                "long": "The City of Brisbane",
-                "short": "Brisbane"
-            },
-            {
-                "key": "cityKey1",
-                "long": tableCaption,
-                "short": "Palo Alto"
-            },
-            {
-                "key": "cityKey3",
-                "long": "The City of San Diego",
-                "short": "San Diego"
-            }
-        ]);
+        console.log($generatedHtml.html());
         assert.equal(sampleData.maps.geog[gridOptions.topicSelected].long, tableCaption);
         assert.equal($generatedHtml.find('table').length, 1);
         assert.equal($generatedHtml.find('table caption').html(), tableCaption);
-        assert.equal($generatedHtml.find('table tr').length, 2);
-        assert.equal($generatedHtml.find('table tr th:nth-child(2)').html(), yearShortName);
-        assert.equal($generatedHtml.find('table tr:nth-child(2) th').html(), datafieldLongName);
+        assert.equal($generatedHtml.find('table tbody tr').length, 1);
+        assert.equal($generatedHtml.find('table thead tr th:nth-child(2)').html(), yearLongName);
+        assert.equal($generatedHtml.find('table tbody tr:nth-child(1) td:nth-child(1)').html(), datafieldLongName);
+        assert.equal($generatedHtml.find('table tbody tr:nth-child(1) td:nth-child(2)').html(), chosenValue);
     });
 });
