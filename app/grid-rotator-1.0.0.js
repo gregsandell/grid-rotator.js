@@ -1,15 +1,14 @@
-function GridRotator(inputData, options) {
-    var gridSource = inputData,
+var gridRotator = (function() {
+
+    var gridSource,
         gridOptions,
         gridResult = {},
         self = this,
         APPNAME = 'grid-rotator';
 
-    this.setOptions = function(_options) {
+    function setOptions(_options) {  // public
         gridOptions = _options;
-    };
-
-    this.setOptions(options);
+    }
 
     /*
      * Arguments
@@ -19,66 +18,27 @@ function GridRotator(inputData, options) {
      *     xParam: name of the field in inputData to treat as x values
      *     yParam: name of the field in inputData to treat as y values
      */
-    this.init = function() {
-
+    function init(_gridSource, _gridOptions) {  // public
+        gridSource = _gridSource;
+        gridOptions = _gridOptions;
         gridResult = generateGrid();
-
-    };
-    /*
-     * It's easier to iterate through an array than a hashmap.  This returns an "array version" of a hashmap.
-     */
-    this.mapToArray = function(dimension, sortType) {
-        var result = [],
-            keys = [],
-            okDimensions = [gridOptions.topicParam, gridOptions.xParam, gridOptions.yParam],
-            okTypes = ['key', 'long', 'short'],
-            map = gridSource.maps[dimension],
-            keys = Object.keys(map);
-
-        if ($.inArray(dimension, okDimensions) == -1) {
-            console.error(APPNAME + ' error:  No such dimension \'' + dimension + '\'.  Acceptable values are ' +
-                okDimensions.join(', ') + '.  Defaulting to \'' + gridOptions.topicParam + '\'');
-            dimension = gridOptions.topicParam;
-        }
-
-        if ($.inArray(sortType, okTypes) == -1) {
-            console.error(APPNAME + ' error:  No such type \'' + sortType + '\'.  Acceptable values are ' +
-                okTypes.join(', ') + '.  Defaulting to \'' + short + '\'');
-            sortType = 'short';
-        }
-
-        $.each(keys, function(idx, key) {
-            var record = map[key];
-            record.key = key;
-            result.push(record);
-        });
-
-        result.sort(function(a, b) {
-            if (a[sortType] < b[sortType]) {
-                return -1;
-            } else if (a[sortType] > b[sortType]) {
-                return 1;
-            } else {
-                return 0; }
-        });
-        return result;
-    };
+    }
 
     /*
      * Generate a ready-to-print grid dataset based on the options.
      */
-    function generateGrid() {   // TO DO should use private gridOptions instead of arg
+    function generateGrid() {  // private
         var xValues = [],
             yValues = [],
             result = {x: []},
             rows = [];
 
-        if (!gridSource || !gridSource.data || !gridSource.data.rows || !gridSource.maps) {
-            throw "Minimal data input requirement not met";
-        }
+        //if (!gridSource || !gridSource.data || !gridSource.data.rows || !gridSource.maps) {
+        //    throw "Minimal data input requirement not met";
+        //}
 
         /* Make arrays of unique x and y values */
-        $.each(gridSource.data.rows, function(i, row) {
+        $.each(gridSource.rows, function(i, row) {
             if ($.inArray(row[gridOptions.xParam], xValues) == -1) {
                 xValues.push(row[gridOptions.xParam]);
             }
@@ -106,7 +66,7 @@ function GridRotator(inputData, options) {
             $.each(xValues, function(j, xValue) {
                 var v = "";
                 //console.log('gridOptions before iterating on rows is ', gridOptions);
-                $.each(gridSource.data.rows, function(i, row) {
+                $.each(gridSource.rows, function(i, row) {
                     //if (row[gridOptions.topicParam] == gridOptions.topicSelected) {
                     //    console.log('matching titles');
                     //} else {
@@ -142,11 +102,11 @@ function GridRotator(inputData, options) {
         return result;
     };
 
-    this.getGridResult = function() {
+    function getGridResult() {  // public
         return gridResult;
     };
 
-    this.generateView = function(caption) {
+    function generateView(caption) {
         var dataview = $("<div class='datagrid'>");
         var table = $("<table>");
         var caption = $('<caption>').text(caption);
@@ -174,17 +134,132 @@ function GridRotator(inputData, options) {
         return dataview;
     };
 
-    this.verifyInputData = function(_data) {
-        var topic1 = _data.maps.topics[0].key,
-            topic2 = _data.maps.topics[1].key,
-            topic3 = _data.maps.topics[2].key,
+    function isObject(item) {
+        return (typeof item !== 'null') && (typeof item === 'object') && (typeof item !== 'array') &&
+            (typeof item != 'function');
+    }
+
+    function isValidKey(key) {
+        return typeof key === 'string' && key.length > 0;
+    }
+
+    function isValidTopic(topic) {
+        return typeof topic.key === 'string' && typeof topic.title === 'string' &&
+                isValidKey(topic.key)  && topic.title.length > 0;
+     }
+
+    function verifyJsonSchema(_data) {
+        var verifiers = [
+            function() { return isObject(_data) || 'input data is not an object'; },
+            function() { return Object.keys(_data).length == 3 && typeof _data.maps !== 'undefined' && typeof _data.topics != 'undefined' &&
+                typeof _data.rows !== 'undefined' || 'input object must contain fields \'rows\', \'topics\', and \'maps\''; },
+            function() { return $.isArray(_data.rows) || '\'data.rows\' field is not an array'},
+            function() { return isObject(_data.maps) && Object.keys(_data.maps).length === 3 || '\'maps\' is not an object with three fields'},
+            function() { return typeof _data.topics !== 'undefined' && $.isArray(_data.topics) || '\'topics\' field must exist and be an array'},
+            function() { return _data.topics.length == 3 || '\'data.topics\' array is not three items'},
+            function() { return isObject(_data.topics[0]) && isObject(_data.topics[1]) &&
+                isObject(_data.topics[2]) || 'items in \'data.topics[]\' are not objects'},
+            function() { return isValidTopic(_data.topics[0]) && isValidTopic(_data.topics[1]) &&
+                isValidTopic(_data.topics[2]) || 'objects in \'data.topics[]\' lack usable \'key\' and \'title\' fields'},
+            function() { return isObject(_data.maps[_data.topics[0].key]) ||
+                '\'' + _data.topics[0].key + '\' is not an object field in \'maps\''},
+            function() { return isObject(_data.maps[_data.topics[1].key]) ||
+                '\'' + _data.topics[1].key + '\' is not an object field in \'maps\''},
+            function() { return isObject(_data.maps[_data.topics[2].key]) ||
+                '\'' + _data.topics[2].key + '\' is not an object field in \'maps\''},
+            function() { return Object.keys(_data.maps[_data.topics[0].key]).length > 0 ||
+                '\'maps.' +  _data.topics[0].key + '\' should have at least one field'},
+            function() { return Object.keys(_data.maps[_data.topics[1].key]).length > 0 ||
+                '\'maps.' +  _data.topics[1].key + '\' should have at least one field'},
+            function() { return Object.keys(_data.maps[_data.topics[2].key]).length > 0 ||
+                '\'maps.' +  _data.topics[2].key + '\' should have at least one field'}
+        ];
+
+        var result;
+        $.each(verifiers, function(idx, verifier) {
+            if (typeof (result = verifier()) === 'string') {
+                return false;
+            }
+        });
+        if (typeof result === 'string') {
+            console.warn(APPNAME = ' input data validation: ' + result);
+            return false;
+        }
+        return true;
+    }
+
+    function verifyInputData(_data) {
+        if (!verifyJsonSchema(_data)) {
+            return;
+        }
+        //if (!_data.maps || !_data.topics || !$.jquery.isArray(_data.topics) ||
+        //    _data.topics.length != 3 || !_data.data || !_data.rows || !$.isArray(_data.rows)) {
+        //    console.warn(APPNAME = ' input data validation: input data is incomplete.');
+        //    return;
+        //}
+        var topic1 = _data.topics[0].key,
+            topic2 = _data.topics[1].key,
+            topic3 = _data.topics[2].key,
             dim1Keys = Object.keys(_data.maps[topic1]),
             dim2Keys = Object.keys(_data.maps[topic2]),
             dim3Keys = Object.keys(_data.maps[topic3]),
             expectedCount = dim1Keys.length * dim2Keys.length * dim3Keys.length,
             actualCount = 0,
-            rowsCopy = JSON.parse(JSON.stringify(_data.data.rows)),
+            rowsCopy = JSON.parse(JSON.stringify(_data.rows)),
             missingTuples = [];
+
+        var done = false;
+        $.each(_data.maps, function(key, value) {
+            $.each(value, function(key2, value2) {
+                if (!isObject(value2)) {
+                    console.warn(APPNAME + ' validation error: \'maps.' + key + '.' + key2 + '\' must be an object');
+                    done = true;
+                    return false;
+                }
+                if (typeof _data.maps[key][key2].long === 'undefined' || typeof _data.maps[key][key2].short === 'undefined') {
+                    console.warn(APPNAME + ' validation error: \'maps.' + key + '.' + key2 +
+                        '\' must contain fields \'long\' and \'short\'');
+                    done = true;
+                    return false;
+                }
+            });
+            if (done) {
+                return false;
+            }
+        });
+
+        $.each(_data.rows, function(idx, row) {
+            if (typeof row[topic1] === 'undefined' || typeof row[topic2] === 'undefined' ||
+                typeof row[topic3] === 'undefined' || typeof row.value === 'undefined') {
+                console.warn(APPNAME + ' error: each object of array \'rows\' must contain fields \'' +
+                    topic1 + '\', \'' + topic2 + '\', \'' + topic3 + '\' and \'value\'');
+                return false;
+            }
+            if (typeof row[topic1] !== 'string' || typeof row[topic2] !== 'string' ||
+                typeof row[topic3] !== 'string') {
+                console.warn(APPNAME + ' validation error: fields \'' + topic1 + '\', \'' + topic2 + '\', and \'' + topic3 +
+                    '\' each object of array \'rows\' must be strings');
+                return false;
+            }
+            done = false;
+            $.each([topic1, topic2, topic3], function(idx, topic) {
+                if (typeof _data.maps[topic] == 'undefined') {
+                    console.warn(APPNAME + ' validation error: value \'' + row[topic] + '\' in item in \'rows\' is not ' +
+                        'registered in the \'maps\' object');
+                    done = true;
+                    return false;
+                }
+                if ($.inArray(row[topic], Object.keys(_data.maps[topic])) == -1) {
+                    console.warn(APPNAME + ' validation error: field \'' + topic + '\' of each object of array \'rows\' ' +
+                        'must be one of: ' + Object.keys(_data.maps[topic]).joinAnd('or'));
+                    done = true;
+                    return false;
+                }
+            });
+            if (done) {
+                return false;
+            }
+        });
 
         $.each(dim1Keys, function(idx, dim1Key) {
             $.each(dim2Keys, function(jdx, dim2Key) {
@@ -201,8 +276,9 @@ function GridRotator(inputData, options) {
                     if (typeof foundIdx === "undefined") {
                         missingTuples.push("[" + dim1Key + "][" + dim2Key + "][" + dim3Key + "]");
                     } else {
-                        rowsCopy.splice(foundIdx, 1);
+                        rowsCopy.splice(foundIdx, 1); // shrink the list to search
                     }
+
                 });
             });
         });
@@ -214,7 +290,12 @@ function GridRotator(inputData, options) {
 
     };
 
-    this.validateOptions = function(_options) {
+    Array.prototype.joinAnd = function(joiner) {
+        return [this.slice(0, -1).join(', '), this.slice(-1)[0]].join(this.length < 2 ? '' : (' ' + joiner + ' '));
+    };
+
+    function validateOptions(_options) {
+        console.log('evaluating these options: ' + JSON.stringify(_options));
         var requiredOptions = {"xParam": false, "yParam": false, "topicParam": false},
             missing,
             opt;
@@ -227,12 +308,26 @@ function GridRotator(inputData, options) {
         });
         if (missing.length > 0) {
             // This join() will result in an "and" before final item.  (e.g. "a, b and c")
-            var optList = [missing.slice(0, -1).join(', '), missing.slice(-1)[0]].join(missing.length < 2 ? '' : ' and ');
+            var optList = missing.joinAnd('and');
             var plural = (missing.length > 1) ? "s " : " ";
             var verb = (missing.length > 1) ? " are " : " is ";
             var s = APPNAME + ' error:  Required field' + plural + optList + verb + 'missing from the options object, so ' + APPNAME + ' will fail.';
-            console.error(s);
+            console.warn(s);
         }
     };
 
-};
+    // TODO: write verifier that corroborates options with data
+    // TODO: encapsulate verfication methods in a module
+
+    return {
+        setOptions: setOptions,
+        init: init,
+        getGridResult: getGridResult,
+        generateView: generateView,
+        verifyInputData: verifyInputData,
+        verifyJsonSchema: verifyJsonSchema,
+        validateOptions: validateOptions
+    };
+
+})();
+

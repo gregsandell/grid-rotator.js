@@ -18,13 +18,10 @@ function GridRotatorCtrl() {
 
     this.makeDatagrid = function(data) {
         var chartSubjectArray,
-            topics = data.maps.topics,
+            topics = data.topics,
             gridOptions,
-            gridRotator,
             xParam,
             yParam;
-
-        gridRotator = new GridRotator({}, {});
 
         if (this.rotationCount % 3 == 0) {
             gridOptions = { "topicParam": topics[0].key, "xParam": topics[1].key, "yParam": topics[2].key};
@@ -36,7 +33,7 @@ function GridRotatorCtrl() {
 
         gridRotator.validateOptions(gridOptions);
 
-        $("#rotateLabel").html("Topic:<br>" + data.maps.topics[this.rotationCount % 3].title);
+        $("#rotateLabel").html("Topic:<br>" + data.topics[this.rotationCount % 3].title);
         if (this.flipCount % 2 == 1) {
             /* Swap 'em */
             xParam = gridOptions.xParam;
@@ -52,8 +49,7 @@ function GridRotatorCtrl() {
                 tableCaption = record.long;
 
             gridOptions.topicSelected = topicSelected;
-            gridRotator = new GridRotator(data, gridOptions);
-            gridRotator.init();
+            gridRotator.init(data, gridOptions);
             table = gridRotator.generateView(tableCaption);
 
             $("#datapageView #grids").append(table);
