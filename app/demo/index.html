@@ -69,34 +69,11 @@
                     });
                     sampleData = datasets[$('select#dataSelect').val()];
                     $(".source").html("Source: " + sampleData.source);
-                    sampleData = {
-                        data: {
-                            rows: [
-                                {
-                                    foo: 'one',
-                                    wow: 'two',
-                                    sniff: 'three',
-                                    value: '2'
-                                },
-                                {
-                                    foo: 'two',
-                                    wow: 'two',
-                                    sniff: 'three',
-                                    value: '2'
-                                }
 
-                            ],
-                            topics: [{key: 'foo', title: '1'},{key: 'wow', title: '1'},{key: 'sniff', title: '1'}],
-                            maps: {
-                                foo: {one: {long: 1, short: 2}, two: {long: 1, short: 2}},
-                                wow: {two: {long: 1, short: 2}},
-                                sniff: {three: {long: 1, short: 2}}
-                            }
-                        }
-                    };
-//                    console.log('sampleData.data.maps[sampleData.data.maps.topics[0].key] is ' + sampleData.data.maps[sampleData.data.maps.topics[0].key]);
+                    // TODO Replace this with a call to a 'suite'
                     gridRotator.verifyInputData(sampleData.data);
-                    gridRotator.validateOptionsViaData(sampleData.data, {xParam: 'foof', yParam: 'wow', topicParam: 'sniff', topicSelected: 'four'});
+                    gridRotator.validateOptionsViaData(sampleData.data, {xParam: 'foo', yParam: 'wow', topicParam: 'sniff', topicSelected: 'four'});
+
                     gridRotatorCtrl.makeDatagrid(sampleData.data);
                 }
 

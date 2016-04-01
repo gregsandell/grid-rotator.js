@@ -2,8 +2,34 @@ var assert = chai.assert,
     expect = chai.expect,
     should = chai.should();
 
+function getValidTestData() {
+    return {
+        data: {
+            rows: [
+                {
+                    foo: 'one',
+                    wow: 'two',
+                    sniff: 'three',
+                    value: '2'
+                },
+                {
+                    foo: 'two',
+                    wow: 'two',
+                    sniff: 'three',
+                    value: '2'
+                }
 
-// TODO:  lots of variable name changes will break current tests
+            ],
+            topics: [{key: 'foo', title: '1'},{key: 'wow', title: '1'},{key: 'sniff', title: '1'}],
+            maps: {
+                foo: {one: {long: 1, short: 2}, two: {long: 1, short: 2}},
+                wow: {two: {long: 1, short: 2}},
+                sniff: {three: {long: 1, short: 2}}
+            }
+        },
+        options: {xParam: 'foo', yParam: 'wow', topicParam: 'sniff', topicSelected: 'three'}
+    };
+}
 describe("GridRotator tests", function () {
     var suite;
 
@@ -42,7 +68,13 @@ describe("GridRotator tests", function () {
         assert.equal($generatedHtml.find('table tbody').length, '1');
     });
 
-    describe('Tests for acceptable options', function () {
+    describe('Validates options and input data', function () {
+
+        var goodOptions,
+            badOptions,
+            goodData,
+            badData,
+            result;
 
         beforeEach(function () {
             suite.sandbox.spy(console, 'warn');
@@ -55,29 +87,86 @@ describe("GridRotator tests", function () {
                 },
                 maps: {}
             };
-            var badOptions = {xParam: 'foo', yParam: 'bar', topicParam: 'wow'};
-            gridRotator.init(gridSource, badOptions);
-            gridRotator.validateOptions(badOptions);
+            goodOptions = getValidTestData().options;
+            result = gridRotator.validateOptions(goodOptions);
+            assert.equal(result, true);
             console.warn.called.should.be.false;
         });
 
-        it("Complains about bad options", function () {
+        it("Complains about empty options", function () {
 
-            var gridSource = {
-                data: {
-                    rows: [],
-                },
-                maps: {}
-            };
-            var badOptions = {};
-            gridRotator.init(gridSource, badOptions);
-            gridRotator.validateOptions(badOptions);
+            badOptions = getValidTestData().options;
+            delete badOptions.xParam;
+            result = gridRotator.validateOptions(badOptions);
+            assert.equal(result, false);
             console.warn.called.should.be.true;
         });
 
-        it("tests for incomplete input data", function () {
-            var sampleData = {};
-            gridRotator.verifyInputData(sampleData);
+        it("Accepts good input data", function () {
+            goodData = getValidTestData().data;
+            assert.equal(gridRotator.verifyJsonSchema(goodData), true);
+            console.warn.called.should.not.be.true;
+        });
+
+        it("Complains about missing input data", function () {
+            badData = undefined;
+            assert.equal(gridRotator.verifyJsonSchema(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about missing top level elements in input data", function () {
+            badData = getValidTestData().options;
+            delete badData.rows;
+            assert.equal(gridRotator.verifyJsonSchema(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about bad type of rows data", function () {
+            badData = getValidTestData().data;
+            badData.rows = 1;
+            assert.equal(gridRotator.verifyJsonSchema(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about incomplete maps data", function () {
+            badData = getValidTestData().data;
+            badData.maps = {foo: 1, bar: 2};  // Must be three fields
+            assert.equal(gridRotator.verifyJsonSchema(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about wrong type for \'topics\' field", function () {
+            badData = getValidTestData().data;
+            badData.topics = 1;  // must be array
+            assert.equal(gridRotator.verifyJsonSchema(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about wrong object fields in items of \'topics\' array", function () {
+            badData = getValidTestData().data;
+            badData.topics = [{key: 'foo', title: 'bar'}, {key: 'foo', title: 'bar'}, {bad: 'foo', horrible: 'bar'}];
+            assert.equal(gridRotator.verifyJsonSchema(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about wrong object fields in items of \'topics\' array", function () {
+            badData = getValidTestData().data;
+            badData.topics = [{key: 'foo', title: 'bar'}, {key: 'foo', title: 'bar'}, {bad: 'foo', horrible: 'bar'}];
+            assert.equal(gridRotator.verifyJsonSchema(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about wrong object fields in items of \'topics\' array", function () {
+            badData = getValidTestData().data;
+            badData.topics[0].key = 'foof';  // supposed to be 'foo'
+            assert.equal(gridRotator.verifyJsonSchema(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains item in maps having missing data parameters", function () {
+            badData = getValidTestData().data;
+            badData.maps.foo = {};  // supposed to contain fields
+            assert.equal(gridRotator.verifyJsonSchema(badData), false);
             console.warn.called.should.be.true;
         });
 
@@ -132,7 +221,6 @@ describe("GridRotator tests", function () {
                 }
             }
         };
-        gridRotator = gridRotator;
         gridRotator.init(sampleData, gridOptions);
 
         var $generatedHtml = gridRotator.generateView(sampleData.maps.geog[gridOptions.topicSelected].long);
