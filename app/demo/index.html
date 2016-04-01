@@ -11,6 +11,7 @@
         <script src="datasets/ufoSample.js"></script>
         <script src="datasets/hairEyeSexSample.js"></script>
         <script src="datasets/UCBAdmissions.js"></script>
+        <script src="datasets/Schooldays.js"></script>
         <link rel="stylesheet" href="demo.css">
         <script>
             var gridRotatorCtrl = new GridRotatorCtrl(),
@@ -32,6 +33,11 @@
                     data: UCBAdmissionsSample,
                    source: "https://vincentarelbundock.github.io/Rdatasets/datasets.html",
                     title: "Student Admissions at UC Berkeley"
+                },
+                SchooldaysSample: {
+                    data: SchooldaysSample,
+                    source: "https://vincentarelbundock.github.io/Rdatasets/datasets.html",
+                    title: "Days not Spent at School"
                 }
             };
             gridRotatorCtrl.init();

@@ -2,18 +2,21 @@ var parse = require('csv-parse');
 var fs = require('fs');
 var fs2 = require('fs');
 var outputJSON = {
-    data: {
-        rows: []
-    },
+    rows: [],
+    "topics": [
+        {"key": "race", "title": "Race"},
+        {"key": "gender", "title": "Gender"},
+        {"key": "school", "title": "School"}
+    ],
     maps: {
-        admit: {
-            admitted: {
-                short: 'Admitted',
-                long: 'Admitted'
+        race: {
+            aboriginal: {
+                short: 'Aboriginal',
+                long: 'Aboriginal'
             },
-            rejected: {
-                short: 'Rejected',
-                long: 'Rejected'
+            non_aboriginal: {
+                short: 'Non Aboriginal',
+                long: 'Non Aboriginal'
             }
         },
         gender: {
@@ -26,55 +29,42 @@ var outputJSON = {
                 short: 'Female'
             }
         },
-        department: {
-            A: {
-                long: "Department A",
-                short: "A"
+        school: {
+            F0: {
+                long: "Primary",
+                short: "Primary"
             },
-            B: {
-                long: "Department B",
-                short: "B"
+            F1: {
+                long: "First",
+                short: "First"
             },
-            C: {
-                long: "Department C",
-                short: "C"
+            F2: {
+                long: "Second",
+                short: "Second"
             },
-            D: {
-                long: "Department D",
-                short: "D"
-            },
-            E: {
-                long: "Department E",
-                short: "E"
-            },
-            F: {
-                long: "Department F",
-                short: "F"
-            },
+            F3: {
+                long: "Third Form",
+                short: "Third Form"
+            }
         }
     }
 };
-fs.readFile('UCBAdmissions.csv', 'utf8', function (err, data) {
+fs.readFile('schooldays.csv', 'utf8', function (err, data) {
     parse(data, function (err, json) {
         //console.log(JSON.stringify(json));
         json.map(function(record, idx) {
             if (idx == 0) return true;
-            var caseAltered = record.map(function (item, idx) {
-                //console.log('idx = ' + idx);
-
-                return item.toLowerCase();
-            });
             var newRecord = {
-                admit: caseAltered[1],
-                gender: caseAltered[2],
-                department: caseAltered[3],
-                value: caseAltered[4]
+                race: record[1],
+                gender: record[2],
+                school: record[3],
+                value: record[5]
             };
-            outputJSON.data.rows.push(newRecord);
+            outputJSON.rows.push(newRecord);
         });
         //console.log(outputJSON);
-        var jString = 'var UCBAdmissionsSample = ' + JSON.stringify(outputJSON, null, 4) + ';';
-        fs2.writeFile("UCBAdmissions.js", jString, function(err) {
+        var jString = 'var SchooldaysSample = ' + JSON.stringify(outputJSON, null, 4) + ';';
+        fs2.writeFile("Schooldays.js", jString, function(err) {
             if(err) {
                 return console.log('Error writing file: ' + err);
             }
