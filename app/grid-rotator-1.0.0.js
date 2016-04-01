@@ -151,7 +151,10 @@ var gridRotator = (function () {
                 isValidKey(topic.key) && topic.title.length > 0;
         }
 
-        function verifyJsonSchema(_data) {
+        function verifyJsonSchema(_data, validateOptions) {
+            validateOptions = validateOptions || {};
+            validateOptions.noisy = validateOptions.noisy || false;
+
             var verifiers = [
                 function () {
                     return isObject(_data) || 'input data is not an object';
@@ -190,10 +193,10 @@ var gridRotator = (function () {
                     }
                     return true;
                 },
-                function() {
+                function () {
                     var i;
 
-                    for (i = 0 ; i < _data.topics.length; i++) {
+                    for (i = 0; i < _data.topics.length; i++) {
                         if (Object.keys(_data.maps[_data.topics[i].key]).length === 0) {
                             return '\'maps.' + _data.topics[i].key + '\' should have at least one field'
                         }
@@ -209,16 +212,20 @@ var gridRotator = (function () {
                 }
             });
             if (typeof result === 'string') {
-                console.warn(APPNAME + ' input data validation: ' + result);
+                if (validateOptions.noisy) {
+                    console.warn(APPNAME + ' input data validation: ' + result);
+                }
                 return false;
             }
             return true;
         }
 
         // TODO find better name to distinguish from verifyJsonSchema
-        function verifyInputData(_data) {
-            if (!verifyJsonSchema(_data)) {
-                console.log('returning false');
+        function verifyInputData(_data, validateOptions) {
+            validateOptions = validateOptions || {};
+            validateOptions.noisy = validateOptions.noisy || false;
+
+            if (!verifyJsonSchema(_data, validateOptions)) {
                 return false;
             }
             //if (!_data.maps || !_data.topics || !$.jquery.isArray(_data.topics) ||
@@ -243,13 +250,17 @@ var gridRotator = (function () {
             $.each(_data.maps, function (key, value) {
                 $.each(value, function (key2, value2) {
                     if (!isObject(value2)) {
-                        console.warn(APPNAME + ' input data validation: \'maps.' + key + '.' + key2 + '\' must be an object');
+                        if (validateOptions.noisy) {
+                            console.warn(APPNAME + ' input data validation: \'maps.' + key + '.' + key2 + '\' must be an object');
+                        }
                         done = true;
                         return false;
                     }
                     if (typeof _data.maps[key][key2].long === 'undefined' || typeof _data.maps[key][key2].short === 'undefined') {
-                        console.warn(APPNAME + ' input data validation: \'maps.' + key + '.' + key2 +
-                            '\' must contain fields \'long\' and \'short\'');
+                        if (validateOptions.noisy) {
+                            console.warn(APPNAME + ' input data validation: \'maps.' + key + '.' + key2 +
+                                '\' must contain fields \'long\' and \'short\'');
+                        }
                         done = true;
                         return false;
                     }
@@ -267,27 +278,35 @@ var gridRotator = (function () {
                 done = false;
                 if (typeof row[topic1] === 'undefined' || typeof row[topic2] === 'undefined' ||
                     typeof row[topic3] === 'undefined' || typeof row.value === 'undefined') {
-                    console.warn(APPNAME + ' input data validation: each object of array \'rows\' must contain fields \'' +
-                        topic1 + '\', \'' + topic2 + '\', \'' + topic3 + '\' and \'value\'');
+                    if (validateOptions.noisy) {
+                        console.warn(APPNAME + ' input data validation: each object of array \'rows\' must contain fields \'' +
+                            topic1 + '\', \'' + topic2 + '\', \'' + topic3 + '\' and \'value\'');
+                    }
                     done = true;
                     return false;
                 }
                 if (typeof row[topic1] !== 'string' || typeof row[topic2] !== 'string' ||
                     typeof row[topic3] !== 'string') {
-                    console.warn(APPNAME + ' input data validation: fields \'' + topic1 + '\', \'' + topic2 + '\', and \'' + topic3 +
-                        '\' of each object of array \'rows\' must be strings');
+                    if (validateOptions.noisy) {
+                        console.warn(APPNAME + ' input data validation: fields \'' + topic1 + '\', \'' + topic2 + '\', and \'' + topic3 +
+                            '\' of each object of array \'rows\' must be strings');
+                    }
                     done = true;
                     return false;
                 }
                 if (typeof row.value !== 'string' && typeof row.value !== 'number') {
-                    console.warn(APPNAME + ' input data validation: \'value\' field of each \'rows\' element must be either type \'number\' or \'string\'');
+                    if (validateOptions.noisy) {
+                        console.warn(APPNAME + ' input data validation: \'value\' field of each \'rows\' element must be either type \'number\' or \'string\'');
+                    }
                     done = true;
                     return false;
                 }
                 $.each([topic1, topic2, topic3], function (idx, topic) {
                     if ($.inArray(row[topic], Object.keys(_data.maps[topic])) == -1) {
-                        console.warn(APPNAME + ' input data validation: field \'' + topic + '\' of each object of array \'rows\' ' +
-                            'must be one of: ' + Object.keys(_data.maps[topic]).joinAnd('or'));
+                        if (validateOptions.noisy) {
+                            console.warn(APPNAME + ' input data validation: field \'' + topic + '\' of each object of array \'rows\' ' +
+                                'must be one of: ' + Object.keys(_data.maps[topic]).joinAnd('or'));
+                        }
                         done = true;
                         return false;
                     }
@@ -324,8 +343,11 @@ var gridRotator = (function () {
             });
 
             if (actualCount !== expectedCount) {
-                console.warn(APPNAME + ' input data validation: expected ' + expectedCount + ' observations, only found ' + actualCount);
-                console.warn(APPNAME + ' input data validation: missing values are: ' + JSON.stringify(missingTuples, null, 4));
+                if (validateOptions.noisy) {
+                    console.warn(APPNAME + ' input data validation: expected ' + expectedCount + ' observations, only found ' + actualCount);
+                    console.warn(APPNAME + ' input data validation: missing values are: ' + JSON.stringify(missingTuples, null, 4));
+                }
+                return false;
             }
 
         };
@@ -334,22 +356,25 @@ var gridRotator = (function () {
             return [this.slice(0, -1).join(', '), this.slice(-1)[0]].join(this.length < 2 ? '' : (' ' + joiner + ' '));
         };
 
-        function validateOptionsViaData(_data, _options) {
+        function validateOptionsViaData(_data, _options, validateOptions) {
             var result = true;
+            validateOptions = validateOptions || {};
+            validateOptions.noisy = validateOptions.noisy || false;
 
-            if (!validateOptions(_options)) {
+            if (!validateOptions(_options, validateOptions)) {
                 return false;
             }
             var params = $.map(_options, function (option, key) {
-                console.log('testing key ' + key);
                 return key === 'topicSelected' ? null : {key: key, value: option};
             });
             $.each(params, function (idx, param) {
                 var key = param.key;
                 var value = param.value;
                 if (!(value in _data.maps)) {
-                    console.warn(APPNAME + ' validation error in options: param \'' + key + '\' value of \'' + value + '\' is not an element ' +
-                        'in \'maps\' object');
+                    if (validateOptions.noisy) {
+                        console.warn(APPNAME + ' validation error in options: param \'' + key + '\' value of \'' + value + '\' is not an element ' +
+                            'in \'maps\' object');
+                    }
                     result = false;
                     return false;
                 }
@@ -358,8 +383,10 @@ var gridRotator = (function () {
             if (result === true) {
                 var topicMap = _data.maps[_options.topicParam];
                 if (typeof topicMap[_options.topicSelected] === 'undefined') {
-                    console.warn(APPNAME + ' validation error: topicSelected value \'' + _options.topicSelected + '\' is in options but not an element ' +
-                        'in \'maps.' + _options.topicParam + '\' map');
+                    if (validateOptions.noisy) {
+                        console.warn(APPNAME + ' validation error: topicSelected value \'' + _options.topicSelected + '\' is in options but not an element ' +
+                            'in \'maps.' + _options.topicParam + '\' map');
+                    }
                     result = false;
                     return false;
                 }
@@ -367,9 +394,11 @@ var gridRotator = (function () {
             return result;
         }
 
-        function validateOptions(_options) {
+        function validateOptions(_options, validateOptions) {
             var result = true;
-            console.log('evaluating these options: ' + JSON.stringify(_options));
+            validateOptions = validateOptions || {};
+            validateOptions.noisy = validateOptions.noisy || false;
+
             var requiredOptions = {"xParam": false, "yParam": false, "topicParam": false, "topicSelected": false},
                 missing,
                 opt;
@@ -382,12 +411,14 @@ var gridRotator = (function () {
             });
             if (missing.length > 0) {
                 // This join() will result in an "and" before final item.  (e.g. "a, b and c")
-                var optList = missing.joinAnd('and');
-                var plural = (missing.length > 1) ? "s " : " ";
-                var verb = (missing.length > 1) ? " are " : " is ";
-                var s = APPNAME + ' options validation:  Required field' + plural + optList + verb + 'missing from the options object, so ' + APPNAME + ' will fail.';
+                if (validateOptions.noisy) {
+                    var optList = missing.joinAnd('and');
+                    var plural = (missing.length > 1) ? "s " : " ";
+                    var verb = (missing.length > 1) ? " are " : " is ";
+                    var s = APPNAME + ' options validation:  Required field' + plural + optList + verb + 'missing from the options object, so ' + APPNAME + ' will fail.';
+                    console.warn(s);
+                }
                 result = false;
-                console.warn(s);
             }
             return result;
         };
