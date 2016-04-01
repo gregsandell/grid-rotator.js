@@ -58,7 +58,7 @@
                     sampleData = datasets[$(this).val()];
                     $("#rotateLabel").html("Topic:<br>" + sampleData.data.topics[0].label);
 
-                    gridRotator.verifyInputData(sampleData.data);
+                    gridRotator.validateInputData(sampleData.data);
                     gridRotatorCtrl.makeDatagrid(sampleData.data);
                     $(".source").html("Source: " + sampleData.source);
                 });
@@ -69,10 +69,6 @@
                     });
                     sampleData = datasets[$('select#dataSelect').val()];
                     $(".source").html("Source: " + sampleData.source);
-
-                    // TODO Replace this with a call to a 'suite'
-                    gridRotator.verifyInputData(sampleData.data);
-                    gridRotator.validateOptionsViaData(sampleData.data, {xParam: 'foo', yParam: 'wow', topicParam: 'sniff', topicSelected: 'four'});
 
                     gridRotatorCtrl.makeDatagrid(sampleData.data);
                 }

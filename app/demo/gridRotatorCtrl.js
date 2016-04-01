@@ -31,7 +31,9 @@ function GridRotatorCtrl() {
             gridOptions = {"topicParam": topics[2].key, "xParam": topics[0].key, "yParam": topics[1].key};
         }
 
-        gridRotator.validateOptions(gridOptions);
+        // Validate the data
+        gridOptions.topicSelected = data.rows[0][gridOptions.topicParam];  // choose one at random
+        gridRotator.validateSuite(data, gridOptions, {noisy: true});
 
         $("#rotateLabel").html("Topic:<br>" + data.topics[this.rotationCount % 3].title);
         if (this.flipCount % 2 == 1) {

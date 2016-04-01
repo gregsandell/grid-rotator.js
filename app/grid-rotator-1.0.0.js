@@ -151,7 +151,7 @@ var gridRotator = (function () {
                 isValidKey(topic.key) && topic.title.length > 0;
         }
 
-        function verifyJsonSchema(_data, validateOptions) {
+        function validateJsonSchema(_data, validateOptions) {
             validateOptions = validateOptions || {};
             validateOptions.noisy = validateOptions.noisy || false;
 
@@ -220,19 +220,11 @@ var gridRotator = (function () {
             return true;
         }
 
-        // TODO find better name to distinguish from verifyJsonSchema
-        function verifyInputData(_data, validateOptions) {
+        // TODO find better name to distinguish from validateJsonSchema
+        function validateInputData(_data, validateOptions) {
             validateOptions = validateOptions || {};
             validateOptions.noisy = validateOptions.noisy || false;
 
-            if (!verifyJsonSchema(_data, validateOptions)) {
-                return false;
-            }
-            //if (!_data.maps || !_data.topics || !$.jquery.isArray(_data.topics) ||
-            //    _data.topics.length != 3 || !_data.data || !_data.rows || !$.isArray(_data.rows)) {
-            //    console.warn(APPNAME = ' input data validation: input data is incomplete.');
-            //    return;
-            //}
             var topic1 = _data.topics[0].key,
                 topic2 = _data.topics[1].key,
                 topic3 = _data.topics[2].key,
@@ -361,9 +353,6 @@ var gridRotator = (function () {
             validateOptions = validateOptions || {};
             validateOptions.noisy = validateOptions.noisy || false;
 
-            if (!validateOptions(_options, validateOptions)) {
-                return false;
-            }
             var params = $.map(_options, function (option, key) {
                 return key === 'topicSelected' ? null : {key: key, value: option};
             });
@@ -423,11 +412,17 @@ var gridRotator = (function () {
             return result;
         };
 
+        function validateSuite(_data, _options, validateOptions) {
+            return (validateJsonSchema(_data, validateOptions) && validateInputData(_data, validateOptions) &&
+            validateOptions(_options, validateOptions) && validateOptionsViaData(_data, _options, validateOptions));
+        }
+
         return {
-            verifyJsonSchema: verifyJsonSchema,
-            verifyInputData: verifyInputData,
+            validateJsonSchema: validateJsonSchema,
+            validateInputData: validateInputData,
             validateOptionsViaData: validateOptionsViaData,
-            validateOptions: validateOptions
+            validateOptions: validateOptions,
+            validateSuite: validateSuite
         };
     })();
 
@@ -439,10 +434,11 @@ var gridRotator = (function () {
         init: init,
         getGridResult: getGridResult,
         generateView: generateView,
-        verifyInputData: validator.verifyInputData,
-        verifyJsonSchema: validator.verifyJsonSchema,
+        validateInputData: validator.validateInputData,
+        validateJsonSchema: validator.validateJsonSchema,
         validateOptions: validator.validateOptions,
-        validateOptionsViaData: validator.validateOptionsViaData
+        validateOptionsViaData: validator.validateOptionsViaData,
+        validateSuite: validator.validateSuite
     };
 
 })();
