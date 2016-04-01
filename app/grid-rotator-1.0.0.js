@@ -294,7 +294,40 @@ var gridRotator = (function() {
         return [this.slice(0, -1).join(', '), this.slice(-1)[0]].join(this.length < 2 ? '' : (' ' + joiner + ' '));
     };
 
+    function validateOptionsViaData(_data, _options) {
+        var result = true;
+
+        if (!validateOptions(_options)) {
+            return false;
+        }
+        var params = $.map(_options, function(option, key) {
+            console.log('testing key ' + key);
+            return key === 'topicSelected' ? null : {key: key, value: option};
+        });
+        $.each(params, function(idx, param) {
+            var key = param.key;
+            var value = param.value;
+            if (!(value in _data.maps)) {
+                console.warn(APPNAME + ' validation error in options: param \'' + key + '\' value of \'' + value  + '\' is not an element ' +
+                    'in \'maps\' object');
+                result = false;
+                return false;
+            }
+        });
+
+        if (result === true) {
+            var topicMap = _data.maps[_options.topicParam];
+            if (typeof topicMap[_options.topicSelected] === 'undefined') {
+                console.warn(APPNAME + ' validation error: topicSelected value \'' + _options.topicSelected  + '\' is in options but not an element ' +
+                    'in \'maps.' + _options.topicParam + '\' map');
+                result = false;
+                return false;
+            }
+        }
+        return result;
+    }
     function validateOptions(_options) {
+        var result = true;
         console.log('evaluating these options: ' + JSON.stringify(_options));
         var requiredOptions = {"xParam": false, "yParam": false, "topicParam": false},
             missing,
@@ -312,8 +345,10 @@ var gridRotator = (function() {
             var plural = (missing.length > 1) ? "s " : " ";
             var verb = (missing.length > 1) ? " are " : " is ";
             var s = APPNAME + ' error:  Required field' + plural + optList + verb + 'missing from the options object, so ' + APPNAME + ' will fail.';
+            result = false;
             console.warn(s);
         }
+        return result;
     };
 
     // TODO: write verifier that corroborates options with data
@@ -326,7 +361,8 @@ var gridRotator = (function() {
         generateView: generateView,
         verifyInputData: verifyInputData,
         verifyJsonSchema: verifyJsonSchema,
-        validateOptions: validateOptions
+        validateOptions: validateOptions,
+        validateOptionsViaData: validateOptionsViaData
     };
 
 })();

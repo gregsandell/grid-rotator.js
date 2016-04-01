@@ -96,6 +96,7 @@
                     };
 //                    console.log('sampleData.data.maps[sampleData.data.maps.topics[0].key] is ' + sampleData.data.maps[sampleData.data.maps.topics[0].key]);
                     gridRotator.verifyInputData(sampleData.data);
+                    gridRotator.validateOptionsViaData(sampleData.data, {xParam: 'foof', yParam: 'wow', topicParam: 'sniff', topicSelected: 'four'});
                     gridRotatorCtrl.makeDatagrid(sampleData.data);
                 }
 
