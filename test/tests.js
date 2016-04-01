@@ -163,10 +163,59 @@ describe("GridRotator tests", function () {
             console.warn.called.should.be.true;
         });
 
-        it("Complains item in maps having missing data parameters", function () {
+        it("Complains about item in maps having missing data parameters", function () {
             badData = getValidTestData().data;
             badData.maps.foo = {};  // supposed to contain fields
             assert.equal(gridRotator.verifyJsonSchema(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about empty data elements in elements of \'maps\' field", function () {
+            badData = getValidTestData().data;
+            badData.maps.foo.two = 1;  // supposed to an object
+            assert.equal(gridRotator.verifyInputData(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about bad fields in objects of \'maps\' field", function () {
+            badData = getValidTestData().data;
+            badData.maps.foo.one = {longg: 1, shoort: 2};  // should be 'long' and 'short'
+            assert.equal(gridRotator.verifyInputData(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about bad fields in objects of \'maps\' field", function () {
+            badData = getValidTestData().data;
+            badData.maps.foo.one = {longg: 1, shoort: 2};  // should be 'long' and 'short'
+            assert.equal(gridRotator.verifyInputData(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about missing fields in \'row\' object", function () {
+            badData = getValidTestData().data;
+            badData.rows[0] = {foo: 1, wow: 2, sniff: 3}; // missing 'value' field
+            assert.equal(gridRotator.verifyInputData(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about non-string fields in \'row\' object", function () {
+            badData = getValidTestData().data;
+            badData.rows[0] = {foo: "1", wow: "2", sniff: 3}; // all must be strings
+            assert.equal(gridRotator.verifyInputData(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about wrong type for \'value\' field in \'row\' object", function () {
+            badData = getValidTestData().data;
+            badData.rows[0] = {foo: "1", wow: "2", sniff: "3", value: {wow: 2}}; // all must be strings
+            assert.equal(gridRotator.verifyInputData(badData), false);
+            console.warn.called.should.be.true;
+        });
+
+        it("Complains about value for a field in \'row\' object not being registered in \'maps\' object", function () {
+            badData = getValidTestData().data;
+            badData.rows[0] = {foo: "one", wow: "two", sniff: "weird", value: 2}; // sniff should be 'three'
+            assert.equal(gridRotator.verifyInputData(badData), false);
             console.warn.called.should.be.true;
         });
 

@@ -209,15 +209,17 @@ var gridRotator = (function () {
                 }
             });
             if (typeof result === 'string') {
-                console.warn(APPNAME = ' input data validation: ' + result);
+                console.warn(APPNAME + ' input data validation: ' + result);
                 return false;
             }
             return true;
         }
 
+        // TODO find better name to distinguish from verifyJsonSchema
         function verifyInputData(_data) {
             if (!verifyJsonSchema(_data)) {
-                return;
+                console.log('returning false');
+                return false;
             }
             //if (!_data.maps || !_data.topics || !$.jquery.isArray(_data.topics) ||
             //    _data.topics.length != 3 || !_data.data || !_data.rows || !$.isArray(_data.rows)) {
@@ -236,15 +238,17 @@ var gridRotator = (function () {
                 missingTuples = [];
 
             var done = false;
+
+            // TODO Rename key, value, key2, value2
             $.each(_data.maps, function (key, value) {
                 $.each(value, function (key2, value2) {
                     if (!isObject(value2)) {
-                        console.warn(APPNAME + ' validation error: \'maps.' + key + '.' + key2 + '\' must be an object');
+                        console.warn(APPNAME + ' input data validation: \'maps.' + key + '.' + key2 + '\' must be an object');
                         done = true;
                         return false;
                     }
                     if (typeof _data.maps[key][key2].long === 'undefined' || typeof _data.maps[key][key2].short === 'undefined') {
-                        console.warn(APPNAME + ' validation error: \'maps.' + key + '.' + key2 +
+                        console.warn(APPNAME + ' input data validation: \'maps.' + key + '.' + key2 +
                             '\' must contain fields \'long\' and \'short\'');
                         done = true;
                         return false;
@@ -254,30 +258,35 @@ var gridRotator = (function () {
                     return false;
                 }
             });
+            // TODO is there a nicer way to break out of $.each loops and return a boolean?
+            if (done) {
+                return false;
+            }
 
             $.each(_data.rows, function (idx, row) {
+                done = false;
                 if (typeof row[topic1] === 'undefined' || typeof row[topic2] === 'undefined' ||
                     typeof row[topic3] === 'undefined' || typeof row.value === 'undefined') {
-                    console.warn(APPNAME + ' error: each object of array \'rows\' must contain fields \'' +
+                    console.warn(APPNAME + ' input data validation: each object of array \'rows\' must contain fields \'' +
                         topic1 + '\', \'' + topic2 + '\', \'' + topic3 + '\' and \'value\'');
+                    done = true;
                     return false;
                 }
                 if (typeof row[topic1] !== 'string' || typeof row[topic2] !== 'string' ||
                     typeof row[topic3] !== 'string') {
-                    console.warn(APPNAME + ' validation error: fields \'' + topic1 + '\', \'' + topic2 + '\', and \'' + topic3 +
-                        '\' each object of array \'rows\' must be strings');
+                    console.warn(APPNAME + ' input data validation: fields \'' + topic1 + '\', \'' + topic2 + '\', and \'' + topic3 +
+                        '\' of each object of array \'rows\' must be strings');
+                    done = true;
                     return false;
                 }
-                done = false;
+                if (typeof row.value !== 'string' && typeof row.value !== 'number') {
+                    console.warn(APPNAME + ' input data validation: \'value\' field of each \'rows\' element must be either type \'number\' or \'string\'');
+                    done = true;
+                    return false;
+                }
                 $.each([topic1, topic2, topic3], function (idx, topic) {
-                    if (typeof _data.maps[topic] == 'undefined') {
-                        console.warn(APPNAME + ' validation error: value \'' + row[topic] + '\' in item in \'rows\' is not ' +
-                            'registered in the \'maps\' object');
-                        done = true;
-                        return false;
-                    }
                     if ($.inArray(row[topic], Object.keys(_data.maps[topic])) == -1) {
-                        console.warn(APPNAME + ' validation error: field \'' + topic + '\' of each object of array \'rows\' ' +
+                        console.warn(APPNAME + ' input data validation: field \'' + topic + '\' of each object of array \'rows\' ' +
                             'must be one of: ' + Object.keys(_data.maps[topic]).joinAnd('or'));
                         done = true;
                         return false;
@@ -287,6 +296,10 @@ var gridRotator = (function () {
                     return false;
                 }
             });
+
+            if (done) {
+                return false;
+            }
 
             $.each(dim1Keys, function (idx, dim1Key) {
                 $.each(dim2Keys, function (jdx, dim2Key) {
@@ -311,8 +324,8 @@ var gridRotator = (function () {
             });
 
             if (actualCount !== expectedCount) {
-                console.warn(APPNAME + ' error: expected ' + expectedCount + ' observations, only found ' + actualCount);
-                console.warn(APPNAME + ' error: missing values are: ' + JSON.stringify(missingTuples, null, 4));
+                console.warn(APPNAME + ' input data validation: expected ' + expectedCount + ' observations, only found ' + actualCount);
+                console.warn(APPNAME + ' input data validation: missing values are: ' + JSON.stringify(missingTuples, null, 4));
             }
 
         };
@@ -372,7 +385,7 @@ var gridRotator = (function () {
                 var optList = missing.joinAnd('and');
                 var plural = (missing.length > 1) ? "s " : " ";
                 var verb = (missing.length > 1) ? " are " : " is ";
-                var s = APPNAME + ' error:  Required field' + plural + optList + verb + 'missing from the options object, so ' + APPNAME + ' will fail.';
+                var s = APPNAME + ' options validation:  Required field' + plural + optList + verb + 'missing from the options object, so ' + APPNAME + ' will fail.';
                 result = false;
                 console.warn(s);
             }
