@@ -237,6 +237,21 @@ describe("GridRotator tests", function () {
                 assert.equal(gridRotator.validateInputData(badData, validateOptions), false);
                 console.warn.called.should.be[validateOptions.noisy];
             });
+
+            function optionInMaps(param) {
+                it("Complains about value for option '" + param + "' not being registered in \'maps\' object" + extraText, function () {
+                    goodData = getValidTestData().data;
+                    badOptions = getValidTestData().options;
+                    badOptions[param] = 'crazy';
+                    assert.equal(gridRotator.validateOptionsViaData(goodData, badOptions, validateOptions), false);
+                    console.warn.called.should.be[validateOptions.noisy];
+                });
+            }
+
+            $.each(['xParam', 'yParam', 'topicParam'], function(idx, param) {
+                optionInMaps(param);
+            });
+
         }
 
         for (i = 0; i < 2; i++) {
