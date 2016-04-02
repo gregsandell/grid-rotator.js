@@ -3,7 +3,6 @@ var gridRotator = (function () {
     var gridSource,
         gridOptions,
         gridResult = {},
-        self = this,
         APPNAME = 'grid-rotator',
         validator;
 
@@ -22,7 +21,11 @@ var gridRotator = (function () {
     function init(_gridSource, _gridOptions) {  // public
         gridSource = _gridSource;
         gridOptions = _gridOptions;
-        gridResult = generateGrid();
+        try {
+            gridResult = generateGrid();
+        } catch(e) {
+            gridRotator.validateSuite(gridSource, gridOptions, {noisy: true});
+        }
     }
 
     /*
@@ -33,10 +36,6 @@ var gridRotator = (function () {
             yValues = [],
             result = {x: []},
             rows = [];
-
-        //if (!gridSource || !gridSource.data || !gridSource.data.rows || !gridSource.maps) {
-        //    throw "Minimal data input requirement not met";
-        //}
 
         /* Make arrays of unique x and y values */
         $.each(gridSource.rows, function (i, row) {
@@ -50,8 +49,8 @@ var gridRotator = (function () {
 
         /* Prepare the data for the x-axis of the grid */
         $.each(xValues, function (i, xValue) {
-            var long = gridSource.maps[gridOptions.xParam][xValue].long;
-            var short = gridSource.maps[gridOptions.xParam][xValue].short;
+            var long = gridSource.maps[gridOptions.xParam][xValue].long,
+                short = gridSource.maps[gridOptions.xParam][xValue].short;
 
             result.x.push((long && long != "") ? long : short);
         });
@@ -66,28 +65,9 @@ var gridRotator = (function () {
             row.y = (long && long != "") ? long : short;
             $.each(xValues, function (j, xValue) {
                 var v = "";
-                //console.log('gridOptions before iterating on rows is ', gridOptions);
                 $.each(gridSource.rows, function (i, row) {
-                    //if (row[gridOptions.topicParam] == gridOptions.topicSelected) {
-                    //    console.log('matching titles');
-                    //} else {
-                    //    console.log('unmatching titles, ' + row[gridOptions.topicParam] + ' and ');
-                    //}
-                    //var s = 'row["' + gridOptions.topicParam + '"] (' + row[gridOptions.topicParam] + ') and topicSelected ("' + gridOptions.topicSelected + '") are ';
-                    //console.log(s + (row[gridOptions.topicParam] == gridOptions.topicSelected ? 'equal' : 'NOT equal'));
-                    //s = 'row["' + gridOptions.xParam + '"] (' + row[gridOptions.xParam] + ') and xValue ("' + xValue + '") are ';
-                    //console.log(s, (row[gridOptions.xParam] == xValue ? 'equal' : 'NOT equal'));
-                    //s = 'row["' + gridOptions.yParam + '"] (' + row[gridOptions.yParam] + ') and yValue ("' + yValue + '") are ';
-                    //console.log(s + (row[gridOptions.yParam] == yValue ? 'equal' : 'NOT equal'));
-                    //s = 'row["value"] = ' + row.value + ', we have '
-                    //console.log(s + (row.value ? 'a value' : 'NO value'));
-                    //if (row[gridOptions.xParam] == undefined) console.log('undefined ' + gridOptions.xParam + ' field in row');
-                    //if (xValue == undefined) console.log('undefined xValue');
-                    //if (row[gridOptions.yParam] == undefined) console.log('undefined ' + gridOptions.yParam + ' field in row');
-                    //if (yValue == undefined) console.log('undefined yValue');
                     if (row[gridOptions.topicParam] == gridOptions.topicSelected && row[gridOptions.xParam] == xValue && row[gridOptions.yParam] == yValue) {
                         v = row.value;
-                        //console.log('push');
                         values.push(v);
                         return false;
                     }
@@ -101,26 +81,27 @@ var gridRotator = (function () {
         });
         result.rows = rows;
         return result;
-    };
+    }
 
     function getGridResult() {  // public
         return gridResult;
-    };
+    }
 
     function generateView(caption) {
-        var dataview = $("<div class='datagrid'>");
-        var table = $("<table>");
-        var caption = $('<caption>').text(caption);
+        var dataview = $("<div class='datagrid'>"),
+            table = $("<table>"),
+            caption = $('<caption>').text(caption),
+            thead = $('<thead>'),
+            tr = $("<tr>"),
+            tbody = $("<tbody>");
+
         table.append(caption);
-        var thead = $('<thead>');
-        var tr = $("<tr>");
         tr.append($("<th>").text(""));
         $.each(gridResult.x, function (i, columnLabel) {
             tr.append($("<th>").text(columnLabel));
             thead.append(tr);
         });
         table.append(thead);
-        var tbody = $("<tbody>");
         $.each(gridResult.rows, function (idx, row) {
             var className = (idx % 2) == 1 ? 'alt' : '';
             tr = $("<tr class='" + className + "''>");
@@ -133,7 +114,7 @@ var gridRotator = (function () {
         table.append(tbody);
         dataview.append(table);
         return dataview;
-    };
+    }
 
     validator = (function () {
 
@@ -152,9 +133,6 @@ var gridRotator = (function () {
         }
 
         function validateJsonSchema(_data, validateOptions) {
-            validateOptions = validateOptions || {};
-            validateOptions.noisy = validateOptions.noisy || false;
-
             var verifiers = [
                 function () {
                     return isObject(_data) || 'input data is not an object';
@@ -203,12 +181,15 @@ var gridRotator = (function () {
                     }
                     return true;
                 }
-            ];
+            ],
+                result;
 
-            var result;
+            validateOptions = validateOptions || {};
+            validateOptions.noisy = validateOptions.noisy || false;
+
             $.each(verifiers, function (idx, verifier) {
                 if (typeof (result = verifier()) === 'string') {
-                    return false;
+                    return false;   // End after first failure
                 }
             });
             if (typeof result === 'string') {
@@ -222,8 +203,6 @@ var gridRotator = (function () {
 
         // TODO find better name to distinguish from validateJsonSchema
         function validateInputData(_data, validateOptions) {
-            validateOptions = validateOptions || {};
-            validateOptions.noisy = validateOptions.noisy || false;
 
             var topic1 = _data.topics[0].key,
                 topic2 = _data.topics[1].key,
@@ -234,9 +213,11 @@ var gridRotator = (function () {
                 expectedCount = dim1Keys.length * dim2Keys.length * dim3Keys.length,
                 actualCount = 0,
                 rowsCopy = JSON.parse(JSON.stringify(_data.rows)),
-                missingTuples = [];
+                missingTuples = [],
+                done = false;
 
-            var done = false;
+            validateOptions = validateOptions || {};
+            validateOptions.noisy = validateOptions.noisy || false;
 
             // TODO Rename key, value, key2, value2
             $.each(_data.maps, function (key, value) {
@@ -349,13 +330,14 @@ var gridRotator = (function () {
         };
 
         function validateOptionsViaData(_data, _options, validateOptions) {
-            var result = true;
+            var result = true,
+                params = $.map(_options, function (option, key) {
+                    return key === 'topicSelected' ? null : {key: key, value: option};
+                });
+
             validateOptions = validateOptions || {};
             validateOptions.noisy = validateOptions.noisy || false;
 
-            var params = $.map(_options, function (option, key) {
-                return key === 'topicSelected' ? null : {key: key, value: option};
-            });
             $.each(params, function (idx, param) {
                 var key = param.key;
                 var value = param.value;
@@ -384,13 +366,13 @@ var gridRotator = (function () {
         }
 
         function validateOptions(_options, validateOptions) {
-            var result = true;
-            validateOptions = validateOptions || {};
-            validateOptions.noisy = validateOptions.noisy || false;
-
-            var requiredOptions = {"xParam": false, "yParam": false, "topicParam": false, "topicSelected": false},
+            var result = true,
+                requiredOptions = {"xParam": false, "yParam": false, "topicParam": false, "topicSelected": false},
                 missing,
                 opt;
+
+            validateOptions = validateOptions || {};
+            validateOptions.noisy = validateOptions.noisy || false;
 
             for (opt in requiredOptions) {
                 requiredOptions[opt] = opt in _options;
@@ -410,7 +392,7 @@ var gridRotator = (function () {
                 result = false;
             }
             return result;
-        };
+        }
 
         function validateSuite(_data, _options, validateOptions) {
             return (validateJsonSchema(_data, validateOptions) && validateInputData(_data, validateOptions) &&
@@ -425,9 +407,6 @@ var gridRotator = (function () {
             validateSuite: validateSuite
         };
     })();
-
-    // TODO: write verifier that corroborates options with data
-    // TODO: encapsulate verfication methods in a module
 
     return {
         setOptions: setOptions,

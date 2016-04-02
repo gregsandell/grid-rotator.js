@@ -258,6 +258,15 @@ describe("GridRotator tests", function () {
             validateOptions = {noisy: (i === 0)};
             validateSuite(validateOptions);
         }
+        
+        it('Bad data makes init print an error', function() {
+            badData = getValidTestData().data;
+            badOptions = getValidTestData().options;
+            delete badData.maps;
+            delete badOptions.xParam;
+            gridRotator.init(badData, badOptions);
+            console.warn.called.should.be.true;
+        });
 
     });
 

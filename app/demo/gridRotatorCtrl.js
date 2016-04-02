@@ -17,8 +17,7 @@ function GridRotatorCtrl() {
     };
 
     this.makeDatagrid = function(data) {
-        var chartSubjectArray,
-            topics = data.topics,
+        var topics = data.topics,
             gridOptions,
             xParam,
             yParam;
