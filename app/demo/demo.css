@@ -51,6 +51,7 @@ div.pagecontrols {
 .pagecontrols .label {
 	float: left;
 	margin-top: 6px;
+	margin-left: 10px;
 	font-weight: 700;
 	color: #4d4d4d;
 	font-size: 14px;

@@ -16,11 +16,42 @@ function GridRotatorCtrl() {
         this.flipCount = 0;
     };
 
+
+    this.generateView = function(caption, gridResult) {
+        var dataview = $("<div class='datagrid'>"),
+            table = $("<table>"),
+            caption = $('<caption>').text(caption),
+            thead = $('<thead>'),
+            tr = $("<tr>"),
+            tbody = $("<tbody>");
+
+        table.append(caption);
+        tr.append($("<th>").text(""));
+        $.each(gridResult.x, function (i, columnLabel) {
+            tr.append($("<th>").text(columnLabel));
+            thead.append(tr);
+        });
+        table.append(thead);
+        $.each(gridResult.rows, function (idx, row) {
+            var className = (idx % 2) == 1 ? 'alt' : '';
+            tr = $("<tr class='" + className + "''>");
+            tr.append($("<td>").text(row.y));
+            $.each(row.v, function (jdx, value) {
+                tr.append($("<td>").text(value));
+            });
+            tbody.append(tr);
+        });
+        table.append(tbody);
+        dataview.append(table);
+        return dataview;
+    }
+
     this.makeDatagrid = function(data) {
         var topics = data.topics,
             gridOptions,
             xParam,
-            yParam;
+            yParam,
+            gridRotatorCtrl = new GridRotatorCtrl();
 
         if (this.rotationCount % 3 == 0) {
             gridOptions = { "topicParam": topics[0].key, "xParam": topics[1].key, "yParam": topics[2].key};
@@ -51,7 +82,8 @@ function GridRotatorCtrl() {
 
             gridOptions.topicSelected = topicSelected;
             gridRotator.init(data, gridOptions);
-            table = gridRotator.generateView(tableCaption);
+            console.log('gridResult = ' + JSON.stringify(gridRotator.getGridResult()));
+            table = gridRotatorCtrl.generateView(tableCaption, gridRotator.getGridResult());
 
             $("#datapageView #grids").append(table);
         });

@@ -31,7 +31,8 @@ function getValidTestData() {
     };
 }
 describe("GridRotator tests", function () {
-    var suite;
+    var suite,
+        gridRotatorCtrl;
 
     beforeEach(function () {
         suite = {};
@@ -58,9 +59,13 @@ describe("GridRotator tests", function () {
                 rows: [],
             },
             maps: {}
-        };
+        },
+            $generatedHtml;
+
         gridRotator.init(gridSource, {});
-        var $generatedHtml = gridRotator.generateView('No Caption');
+        gridRotatorCtrl = new GridRotatorCtrl();
+
+        $generatedHtml = gridRotatorCtrl.generateView('No Caption', gridRotator.getGridResult());
         console.log($generatedHtml.html());
         assert.equal($generatedHtml.find('table').length, 1);
         assert.equal($generatedHtml.find('table caption').html(), 'No Caption');
@@ -258,7 +263,7 @@ describe("GridRotator tests", function () {
             validateOptions = {noisy: (i === 0)};
             validateSuite(validateOptions);
         }
-        
+
         it('Bad data makes init print an error', function() {
             badData = getValidTestData().data;
             badOptions = getValidTestData().options;
@@ -318,11 +323,15 @@ describe("GridRotator tests", function () {
                     "cityKey3": {short: 'San Diego', long: 'The City of San Diego'}
                 }
             }
-        };
+            },
+            caption,
+            $generatedHtml;
+
         gridRotator.init(sampleData, gridOptions);
 
-        var $generatedHtml = gridRotator.generateView(sampleData.maps.geog[gridOptions.topicSelected].long);
-        console.log($generatedHtml.html());
+        gridRotatorCtrl = new GridRotatorCtrl();
+        caption = sampleData.maps.geog[gridOptions.topicSelected].long;
+        $generatedHtml = gridRotatorCtrl.generateView(caption, gridRotator.getGridResult());
         assert.equal(sampleData.maps.geog[gridOptions.topicSelected].long, tableCaption);
         assert.equal($generatedHtml.find('table').length, 1);
         assert.equal($generatedHtml.find('table caption').html(), tableCaption);

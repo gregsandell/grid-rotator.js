@@ -87,35 +87,6 @@ var gridRotator = (function () {
         return gridResult;
     }
 
-    function generateView(caption) {
-        var dataview = $("<div class='datagrid'>"),
-            table = $("<table>"),
-            caption = $('<caption>').text(caption),
-            thead = $('<thead>'),
-            tr = $("<tr>"),
-            tbody = $("<tbody>");
-
-        table.append(caption);
-        tr.append($("<th>").text(""));
-        $.each(gridResult.x, function (i, columnLabel) {
-            tr.append($("<th>").text(columnLabel));
-            thead.append(tr);
-        });
-        table.append(thead);
-        $.each(gridResult.rows, function (idx, row) {
-            var className = (idx % 2) == 1 ? 'alt' : '';
-            tr = $("<tr class='" + className + "''>");
-            tr.append($("<td>").text(row.y));
-            $.each(row.v, function (jdx, value) {
-                tr.append($("<td>").text(value));
-            });
-            tbody.append(tr);
-        });
-        table.append(tbody);
-        dataview.append(table);
-        return dataview;
-    }
-
     validator = (function () {
 
         function isObject(item) {
@@ -132,6 +103,7 @@ var gridRotator = (function () {
                 isValidKey(topic.key) && topic.title.length > 0;
         }
 
+        // TODO Change this method name:  it is validating javascript, not JSON.
         function validateJsonSchema(_data, validateOptions) {
             var verifiers = [
                     function () {
@@ -412,7 +384,6 @@ var gridRotator = (function () {
         setOptions: setOptions,
         init: init,
         getGridResult: getGridResult,
-        generateView: generateView,
         validateInputData: validator.validateInputData,
         validateJsonSchema: validator.validateJsonSchema,
         validateOptions: validator.validateOptions,
