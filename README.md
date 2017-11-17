@@ -25,7 +25,7 @@ This of course, is trivial.  Where the API is helpful is in producing rotations 
 One more rotation gives us the data organized by topic of gender:
 ![](docImages/rotate2.png?raw=true "Second rotation of original dataset")
 
-##Input Data Requirements
+## Input Data Requirements
 Input data should be in JSON format with the following high-level design:
 
 	{
@@ -88,7 +88,7 @@ For each dimension or value label, one can have a short and long description.  T
 
 The purpose of this map-lookup is (1) to act as a deterrent to misspellings in the data, and (2) to enforce completeness of data.
 
-##Using the API
+## Using the API
 Include the javascript file in your code:
 
 `
@@ -139,25 +139,25 @@ To make a rotation of the above, you could take the previous <i>options</i>:
 
     {xParam: "eyes", yParam: "sex", topicParam: "hair", topicSelected: "black"}
     
-##Missing Values
+## Missing Values
 If the input dataset is not <i>complete</i> (i.e. there are any missing values for fulling crossing topicParam, xParam and yParam) 
 the observation for such datapoints are represented in the output with the string "n/a" (for 'not available').
 
 Having missing values does not cause gridRotator to fail, 
 
-##Data Validation
+## Data Validation
 There are several routines to validate your input data and options.  The simplest one is:
 
     gridRotator.validateSuite(inputData, options, {noisy: true});
     
 This will run all validations and return true if add your input is correct for gridRotator.  The 3rd argument is options for the validators.  If <i>noisy</i> is true, as above, it will execute a javascript <i>console.warn()</i> describing the first problem it encountered.  
 
-###Automatic Validation
+### Automatic Validation
 gridRotator does not attempt to validate your data before it starts acting on it.  However if bad data causes processing to fail, gridRotator will automatically call <i>gridRotator.validateSuite()</i> with the noisy option on, so you can diagnose the problem in the browser's console.
 
 If bad data caused a failure, calls to <i>gridRotator.getGridResult()</i> will return an empty object.  
 
-###Validation Methods
+### Validation Methods
 The individual validation methods are as follows.  All of them return true if the data is valid, and will write to <i>console.warn()</i> if the <i>noisy</i> option is set.  
 
 This will validate the options only:
@@ -180,7 +180,7 @@ Finally there is a method for checking consistency between the input data and a 
 
 <i>validateOptionsViaData()</i> is dependent on correct input data, so it should always be preceded by a call to <i>validateInputData()</i>.
 
-##Demo Code
+## Demo Code
 gridRotator comes with code in the <i>/app/demo</i> folder.  It requires no server, and can be run by simply loading <i>index.html</i> into your browser.  The demo is implemented in javascript in the file *gridRotatorCtrl.js*.
 
 The first thing the demo illustrates is the iteration through the full family of grids for the given options.  The beginning of this documentation showed iteration through the family of eye colors, of which there are four. The *topicParam* field is therefor set to *eyes*.  For iteration, the *topicSelected* field designates which of the four colors to generate a plot for.  *gridRotator.init()* is called, followed by call to gridRotatorCtrl's *generateView()* method to generate the html for one table.  For next iteration, only the *topicSelected* field is changed, and the view is generated again, and so on, through the remaining two eye colors.  Each table has the same x and y axes of hair color and gender, respectively (corresponding to the settings of the *xParam* and *yParam* options).  The total number of observations is 32.  
@@ -201,6 +201,6 @@ The button on the right performs x- and y-axis swapping.  Returning to the topic
 * Move gender from y- to x-axis
 
 
-##Dependencies
+## Dependencies
 * jQuery (currently works with version 2.2.0)
 
