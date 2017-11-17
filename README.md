@@ -1,12 +1,12 @@
-#grid-rotator.js
+# grid-rotator.js
 
 jQuery-based API for flipping and rotating sets of related data
 
-##TL;DR
+## TL;DR
 <br>
 <span style="font-size: 16px; font-weight: bold">Bring me straight to [the demo](http://gregsandell.com/misc/grid-rotator)!</span>
 
-##Purpose
+## Purpose
 This API allows one to take sets of related x-y data and either flip the axes (x becomes y, and vice versa), or rotate the entire collection.  It applies to datasets where there are three dimensions for every observation.  
 
 For example, consider this small dataset surveying hair color, eye color and gender:
